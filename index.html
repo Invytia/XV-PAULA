@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis XV Años - Paula</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Pinyon+Script&family=Montserrat:wght@300;400;600&family=Cormorant+Garamond:ital,wght@1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <style>
+        :root {
+            /* Paleta de Rosas y Oro */
+            --rose-light: #fff0f3;
+            --rose-medium: #ffb7c5;
+            --rose-deep: #c2185b;
+            --gold: #d4af37;
+            --gold-light: #f9f1d0;
+            --text-dark: #4a0e1c;
+            --white: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--rose-light);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* --- SOBRE ANIMADO --- */
+        #envelope-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, #ffe4e8 0%, #ffb7c5 100%);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1.2s ease-in-out, visibility 1.2s;
+        }
+
+        #envelope-screen.fade-out {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .envelope-wrapper {
+            position: relative;
+            cursor: pointer;
+            transform: scale(0.9);
+            transition: transform 0.5s ease;
+        }
+
+        .envelope {
+            position: relative;
+            width: 340px;
+            height: 240px;
+            background: #f8bbd0;
+            border-radius: 0 0 8px 8px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            border: 1px solid rgba(194, 24, 91, 0.1);
+        }
+
+        .envelope::before {
+            content: '';
+            position: absolute;
+            z-index: 2;
+            border-right: 170px solid #f48fb1;
+            border-top: 120px solid transparent;
+            border-bottom: 120px solid #f48fb1;
+            right: 0; border-radius: 0 0 8px 0;
+        }
+
+        .envelope::after {
+            content: '';
+            position: absolute;
+            z-index: 2;
+            border-left: 170px solid #f06292;
+            border-top: 120px solid transparent;
+            border-bottom: 120px solid #f06292;
+            left: 0; border-radius: 0 0 0 8px;
+        }
+
+        .front-flap {
+            position: absolute;
+            top: 0; left: 0;
+            border-left: 170px solid transparent;
+            border-right: 170px solid transparent;
+            border-top: 130px solid #ec407a;
+            transform-origin: top;
+            transition: transform 0.6s ease 0.2s;
+            z-index: 4;
+        }
+
+        .envelope-wrapper.open .front-flap {
+            transform: rotateX(180deg);
+            z-index: 1;
+        }
+
+        .wax-seal {
+            position: absolute;
+            top: 110px; left: 50%;
+            transform: translateX(-50%);
+            width: 70px; height: 70px;
+            background: radial-gradient(circle, #d4af37 0%, #aa8a2e 100%);
+            border-radius: 50%;
+            z-index: 5;
+            display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: transform 0.4s ease, opacity 0.4s ease 0.4s;
+        }
+
+        .wax-seal i { font-size: 30px; color: white; }
+
+        .envelope-text {
+            position: absolute;
+            bottom: -60px; width: 100%;
+            text-align: center;
+            font-family: 'Cinzel', serif;
+            color: var(--rose-deep);
+            letter-spacing: 2px;
+        }
+
+        /* --- CONTENIDO PRINCIPAL --- */
+        #main-invitation {
+            min-height: 100vh;
+            background: linear-gradient(rgba(255, 240, 243, 0.85), rgba(255, 240, 243, 0.85)), url('imagen.jpg') no-repeat center center;
+            background-size: cover;
+            background-attachment: fixed;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            opacity: 0;
+            transition: opacity 1.5s ease-out;
+        }
+
+        body.content-active #main-invitation { opacity: 1; }
+
+        .invitation-frame {
+            max-width: 550px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid var(--rose-medium);
+            padding: 40px 25px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            position: relative;
+            border-radius: 10px;
+        }
+
+        .section-tag {
+            font-family: 'Cinzel', serif;
+            font-size: 14px;
+            letter-spacing: 4px;
+            color: var(--rose-deep);
+            margin-bottom: 10px;
+        }
+
+        .main-title {
+            font-family: 'Pinyon Script', cursive;
+            font-size: 75px;
+            color: var(--rose-deep);
+            margin: 10px 0;
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+        }
+
+        .count-box {
+            background: var(--rose-light);
+            padding: 10px;
+            min-width: 70px;
+            border-radius: 8px;
+            border: 1px solid var(--rose-medium);
+        }
+
+        .count-num { font-weight: 700; font-size: 20px; color: var(--rose-deep); display: block; }
+        .count-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* --- MAPA Y RECEPCIÓN --- */
+        .info-card {
+            margin-top: 40px;
+            background: var(--white);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 5px solid var(--rose-medium);
+            text-align: left;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 250px;
+            margin-top: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #eee;
+        }
+
+        /* --- BOTONES --- */
+        .btn-rsvp {
+            display: inline-block;
+            margin-top: 30px;
+            padding: 15px 35px;
+            background-color: #25d366;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-family: 'Montserrat', sans-serif;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-rsvp:hover { transform: translateY(-3px); }
+        .btn-rsvp i { margin-right: 10px; }
+
+        .divider {
+            height: 1px;
+            width: 80%;
+            background: linear-gradient(to right, transparent, var(--rose-medium), transparent);
+            margin: 40px auto;
+        }
+
+        /* Animación de pétalos */
+        .petal {
+            position: absolute;
+            background-color: #ffc0cb;
+            border-radius: 150% 0 150% 0;
+            opacity: 0.7;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg); }
+            100% { transform: translateY(110vh) rotate(360deg); }
+        }
+
+        @media (max-width: 480px) {
+            .main-title { font-size: 55px; }
+            .invitation-frame { padding: 30px 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="envelope-screen">
+        <div class="envelope-wrapper" onclick="openEnvelope()">
+            <div class="front-flap"></div>
+            <div class="wax-seal">
+                <i class="fa-solid fa-seedling"></i>
+            </div>
+            <div class="envelope"></div>
+            <div class="envelope-text">
+                <span style="font-size: 12px; opacity: 0.8;">ESTÁS INVITADO A LOS</span><br>
+                <strong>XV AÑOS DE PAULA</strong>
+            </div>
+            <div style="position: absolute; bottom: -100px; width: 100%; text-align: center; font-size: 11px; letter-spacing: 1px; color: var(--rose-deep); animation: pulse 2s infinite;">
+                TOCA EL SELLO PARA ABRIR
+            </div>
+        </div>
+    </div>
+
+    <main id="main-invitation">
+        <div id="petals-container" style="position: absolute; top:0; left:0; width:100%; height:100%; pointer-events:none; z-index:0;"></div>
+
+        <div class="invitation-frame" style="z-index: 1;">
+            <div style="color: var(--rose-deep); font-size: 40px; margin-bottom: 10px;">
+                <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </div>
+
+            <div class="section-tag">MIS QUINCE AÑOS</div>
+            <h1 class="main-title">Paula</h1>
+            
+            <p style="font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 19px; margin: 20px 0; line-height: 1.4;">
+                "Hay momentos en la vida que son especiales por sí solos, pero compartirlos con las personas que amas los hace inolvidables."
+            </p>
+
+            <div class="divider"></div>
+
+            <div class="section-tag">FALTAN SOLO...</div>
+            <div class="countdown-container" id="countdown">
+                <div class="count-box"><span class="count-num" id="days">00</span><span class="count-label">Días</span></div>
+                <div class="count-box"><span class="count-num" id="hours">00</span><span class="count-label">Hrs</span></div>
+                <div class="count-box"><span class="count-num" id="minutes">00</span><span class="count-label">Min</span></div>
+                <div class="count-box"><span class="count-num" id="seconds">00</span><span class="count-label">Seg</span></div>
+            </div>
+
+            <div style="margin: 40px 0;">
+                <h3 style="font-family: 'Cinzel', serif; font-size: 22px; color: var(--gold);">5 de Septiembre, 2026</h3>
+                <p style="letter-spacing: 2px; font-weight: 300;">CIUDAD DE MÉXICO</p>
+            </div>
+
+            <div class="info-card">
+                <h4 style="font-family: 'Cinzel', serif; color: var(--rose-deep); border-bottom: 1px solid #eee; padding-bottom: 10px;">
+                    <i class="fa-solid fa-location-dot"></i> Recepción
+                </h4>
+                <p style="margin-top: 15px; font-weight: 600;">Lugar: <span style="font-weight: 300; color: #777;">Por definir</span></p>
+                <p style="font-size: 14px; color: #555;">Azcapotzalco, CDMX</p>
+                
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.545724128827!2d-99.1900!3d19.4800!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f9a0c3260a99%3A0x6b779b5c3ff4b5!2sAzcapotzalco%2C%20CDMX!5e0!3m2!1ses!2smx!4v1710000000000!5m2!1ses!2smx" 
+                        width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px;">
+                <p style="font-size: 13px; letter-spacing: 1px;">¿NOS ACOMPAÑAS?</p>
+                <a href="https://wa.me/521234567890?text=Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20de%20Paula" target="_blank" class="btn-rsvp">
+                    <i class="fa-brands fa-whatsapp"></i> Confirmar Asistencia
+                </a>
+            </div>
+
+            <div class="divider"></div>
+            <p style="font-family: 'Cinzel', serif; font-size: 10px; color: var(--rose-medium); letter-spacing: 3px;">PAULA • 2026</p>
+        </div>
+    </main>
+
+    <script>
+        function openEnvelope() {
+            const wrapper = document.querySelector('.envelope-wrapper');
+            const screen = document.getElementById('envelope-screen');
+            
+            wrapper.classList.add('open');
+            
+            setTimeout(() => {
+                screen.classList.add('fade-out');
+                document.body.classList.add('content-active');
+                startPetals();
+            }, 1200);
+        }
+
+        const eventDate = new Date("September 5, 2026 00:00:00").getTime();
+
+        const timer = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            const d = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerHTML = d < 10 ? '0'+d : d;
+            document.getElementById("hours").innerHTML = h < 10 ? '0'+h : h;
+            document.getElementById("minutes").innerHTML = m < 10 ? '0'+m : m;
+            document.getElementById("seconds").innerHTML = s < 10 ? '0'+s : s;
+
+            if (distance < 0) {
+                clearInterval(timer);
+                document.getElementById("countdown").innerHTML = "¡ES HOY!";
+            }
+        }, 1000);
+
+        function startPetals() {
+            const container = document.getElementById('petals-container');
+            for (let i = 0; i < 30; i++) {
+                createPetal(container);
+            }
+        }
+
+        function createPetal(container) {
+            const petal = document.createElement('div');
+            petal.className = 'petal';
+            const size = Math.random() * 15 + 10 + 'px';
+            petal.style.width = size;
+            petal.style.height = size;
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = Math.random() * 3 + 2 + 's';
+            petal.style.animationDelay = Math.random() * 5 + 's';
+            petal.style.backgroundColor = ['#ffc0cb', '#ffb6c1', '#ff69b4'][Math.floor(Math.random()*3)];
+            
+            container.appendChild(petal);
+            
+            petal.addEventListener('animationiteration', () => {
+                petal.style.left = Math.random() * 100 + 'vw';
+            });
+        }
+    </script>
+</body>
+</html>
