@@ -7,13 +7,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Pinyon+Script&family=Montserrat:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;1,400;1,600&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Paleta Rosa Pastel Muy Suave y Luminosa */
-            --bg-dark: #fff5f7; /* Rosa ultra claro de respaldo */
-            --bg-bayou: linear-gradient(135deg, #ffe4e8 0%, #fcd5ce 100%); /* Sobre en degradado pastel */
-            --gold-primary: #d5bdaf; /* Tono arena / rose gold suave para detalles */
+            /* Paleta Rosa Pastel Optimizada para Mayor Contraste */
+            --bg-dark: #fff5f7; 
+            --bg-bayou: linear-gradient(135deg, #ffe4e8 0%, #fcd5ce 100%); 
+            --gold-primary: #c2ada0; /* Oscurecido ligeramente para mejor lectura de etiquetas */
             --gold-secondary: #e3d5ca; 
-            --text-light: #594a4e; /* Gris rosáceo oscuro para leer bien sobre pastel */
-            --text-muted: #9c898c; /* Rosa viejo suave para etiquetas */
+            --text-light: #3a2b2f; /* Más oscuro para contraste óptimo */
+            --text-muted: #736063; /* Más oscuro para subetiquetas legibles */
             --magic-glow: rgba(255, 228, 232, 0.6);
         }
 
@@ -69,7 +69,7 @@
             position: relative;
             width: 340px;
             height: 240px;
-            background: #ffc0cb; /* Rosa pastel base */
+            background: #ffc0cb; 
             border-radius: 0 0 8px 8px;
             box-shadow: 0 20px 40px rgba(89, 74, 78, 0.15);
             border: 1px solid rgba(255, 255, 255, 0.5);
@@ -82,7 +82,7 @@
             right: 0;
             width: 0;
             height: 0;
-            border-right: 170px solid #ffb6c1; /* Rosa pastel claro */
+            border-right: 170px solid #ffb6c1; 
             border-top: 120px solid transparent;
             border-bottom: 120px solid #ffb6c1;
             border-radius: 0 0 8px 0;
@@ -96,7 +96,7 @@
             left: 0;
             width: 0;
             height: 0;
-            border-left: 170px solid #ffa6c9; /* Rosa clavel pastel */
+            border-left: 170px solid #ffa6c9; 
             border-top: 120px solid transparent;
             border-bottom: 120px solid #ffa6c9;
             border-radius: 0 0 0 8px;
@@ -111,7 +111,7 @@
             height: 0;
             border-left: 170px solid transparent;
             border-right: 170px solid transparent;
-            border-top: 130px solid #ff9eb5; /* Rosa pastel sutilmente más intenso para solapa */
+            border-top: 130px solid #ff9eb5; 
             transform-origin: top;
             transition: transform 0.6s ease 0.2s;
             z-index: 4;
@@ -129,7 +129,7 @@
             transform: translateX(-50%);
             width: 60px;
             height: 60px;
-            background: radial-gradient(circle, #fff0f3 0%, #e8c3c8 100%); /* Sello nacarado pastel */
+            background: radial-gradient(circle, #fff0f3 0%, #e8c3c8 100%); 
             border-radius: 50%;
             z-index: 5;
             display: flex;
@@ -142,7 +142,7 @@
         .wax-seal svg {
             width: 30px;
             height: 30px;
-            fill: #9c898c;
+            fill: #736063;
         }
 
         .envelope-wrapper.open .wax-seal {
@@ -200,13 +200,14 @@
             max-width: 500px;
             width: 100%;
             border: 1px solid var(--gold-secondary);
-            padding: 40px 30px;
+            padding: 45px 30px;
             text-align: center;
             position: relative;
-            background: rgba(255, 250, 252, 0.65); 
+            /* Mayor opacidad de fondo para excelente lectura */
+            background: rgba(255, 253, 254, 0.88); 
             box-shadow: 0 15px 35px rgba(89, 74, 78, 0.15);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             border-radius: 4px;
         }
 
@@ -221,53 +222,53 @@
             fill: var(--gold-primary);
         }
 
-        /* Tipografía */
+        /* Tipografía Avanzada */
         .section-tag {
             font-family: 'Cinzel', serif;
-            font-size: 11px;
+            font-size: 12px;
             letter-spacing: 5px;
             color: var(--text-muted);
             text-transform: uppercase;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             font-weight: 600;
         }
 
         .main-title {
             font-family: 'Pinyon Script', cursive;
-            font-size: 65px;
+            font-size: 70px;
             color: var(--text-light);
             margin-bottom: 5px;
-            text-shadow: 0 2px 5px rgba(255, 255, 255, 0.6);
+            text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
             line-height: 1.1;
         }
 
         .full-name {
             font-family: 'Cinzel', serif;
-            font-size: 12px;
+            font-size: 13px;
             letter-spacing: 3px;
             color: var(--text-light);
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             font-weight: 600;
         }
 
         .phrase {
             font-family: 'Cormorant Garamond', serif;
             font-style: italic;
-            font-size: 18px;
+            font-size: 19px;
             color: var(--text-light);
             line-height: 1.6;
             margin-bottom: 35px;
-            padding: 0 15px;
+            padding: 0 10px;
         }
 
         .divider {
-            width: 60px;
+            width: 70px;
             height: 1px;
             background: linear-gradient(to right, transparent, var(--gold-primary), transparent);
             margin: 25px auto;
         }
 
-        /* Bloque de Información Destacada */
+        /* Bloques de Información */
         .info-grid {
             margin-top: 30px;
         }
@@ -278,17 +279,17 @@
 
         .info-label {
             font-family: 'Cinzel', serif;
-            font-size: 11px;
+            font-size: 12px;
             letter-spacing: 3px;
             color: var(--text-muted);
             text-transform: uppercase;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             font-weight: 600;
         }
 
         .info-value-main {
             font-family: 'Cinzel', serif;
-            font-size: 24px;
+            font-size: 25px;
             font-weight: 600;
             color: var(--text-light);
             letter-spacing: 2px;
@@ -296,78 +297,59 @@
 
         .info-value-sub {
             font-family: 'Montserrat', sans-serif;
-            font-size: 14px;
+            font-size: 15px;
+            font-weight: 500;
             color: var(--text-light);
-            margin-top: 5px;
+            margin-top: 6px;
             letter-spacing: 1px;
         }
 
         .family-names {
             font-family: 'Cormorant Garamond', serif;
-            font-size: 19px;
-            font-weight: 500;
+            font-size: 21px;
+            font-weight: 600;
             color: var(--text-light);
             line-height: 1.5;
             margin-top: 5px;
         }
 
-        /* Estilos de la Sección de Galería Deslizable */
-        .gallery-container {
+        /* Estilos de Formulario de Confirmación */
+        .rsvp-form {
+            margin-top: 25px;
+            text-align: left;
             width: 100%;
-            overflow: hidden;
-            position: relative;
-            margin: 20px 0;
         }
 
-        .carousel-track {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scroll-behavior: smooth;
-            -webkit-overflow-scrolling: touch;
-            gap: 12px;
-            padding: 10px 0;
+        .form-group {
+            margin-bottom: 18px;
         }
 
-        .carousel-track::-webkit-scrollbar {
-            display: none;
+        .form-label {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-bottom: 6px;
         }
 
-        .carousel-slide {
-            flex: 0 0 75%;
-            scroll-snap-align: center;
-            aspect-ratio: 3 / 4;
+        .form-input, .form-select {
+            width: 100%;
+            padding: 12px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            color: var(--text-light);
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--gold-secondary);
             border-radius: 4px;
-            overflow: hidden;
-            border: 1px solid rgba(213, 189, 175, 0.4);
-            box-shadow: 0 8px 20px rgba(89, 74, 78, 0.1);
+            outline: none;
+            transition: border-color 0.3s ease;
         }
 
-        .carousel-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .carousel-dots {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin-top: 10px;
-            margin-bottom: 15px;
-        }
-
-        .dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-            background: var(--gold-primary);
-            opacity: 0.3;
-            transition: opacity 0.3s ease;
-        }
-
-        .dot.active {
-            opacity: 1;
+        .form-input:focus, .form-select:focus {
+            border-color: var(--gold-primary);
         }
 
         /* Estilos de la Cuenta Atrás */
@@ -381,34 +363,34 @@
 
         .countdown-item {
             flex: 1;
-            background: rgba(255, 255, 255, 0.6);
-            border: 1px solid rgba(213, 189, 175, 0.3);
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(213, 189, 175, 0.4);
             padding: 10px 5px;
             border-radius: 4px;
         }
 
         .countdown-number {
             font-family: 'Cinzel', serif;
-            font-size: 20px;
+            font-size: 22px;
             font-weight: 700;
             color: var(--text-light);
             display: block;
         }
 
         .countdown-label {
-            font-size: 9px;
+            font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--text-muted);
             font-weight: 600;
         }
 
-        /* Ficha de Recepción y Mapa */
+        /* Fichas de Mapas */
         .map-card {
             margin-top: 15px;
-            border: 1px solid rgba(213, 189, 175, 0.4);
-            background: rgba(255, 255, 255, 0.7);
-            padding: 15px;
+            border: 1px solid rgba(213, 189, 175, 0.5);
+            background: rgba(255, 255, 255, 0.85);
+            padding: 16px;
             border-radius: 6px;
             text-align: left;
         }
@@ -422,14 +404,52 @@
             border: 1px solid rgba(213, 189, 175, 0.3);
         }
 
+        /* Botón Sticky Control de Música flotante */
+        #music-control-btn {
+            position: fixed;
+            bottom: 25px;
+            right: 25px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--text-light);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 999;
+            box-shadow: 0 4px 15px rgba(89, 74, 78, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.3s ease;
+        }
+
+        #music-control-btn:hover {
+            transform: scale(1.05);
+        }
+
+        #music-control-btn.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #music-control-btn svg {
+            width: 22px;
+            height: 22px;
+            fill: #ffffff;
+        }
+
         /* Botón de Confirmación WhatsApp */
         .btn-whatsapp {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
-            margin-top: 25px;
-            padding: 14px 30px;
+            width: 100%;
+            margin-top: 15px;
+            padding: 14px 20px;
             background: var(--text-light);
             color: #ffffff;
             border: 1px solid var(--text-light);
@@ -443,18 +463,18 @@
             box-shadow: 0 4px 10px rgba(89, 74, 78, 0.15);
             font-weight: 600;
             border-radius: 4px;
+            text-align: center;
         }
 
         .btn-whatsapp:hover {
             background: #ffffff;
             color: var(--text-light);
-            transform: translateY(-2px);
         }
 
         /* Flores / Pétalos Flotantes */
         .flower-petal {
             position: absolute;
-            background-color: #ffd1dc; /* Rosa pastel muy claro para los pétalos */
+            background-color: #ffd1dc; 
             border-radius: 150% 0 150% 0;
             pointer-events: none;
             filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
@@ -496,14 +516,20 @@
             .envelope::after { border-left-width: 145px; border-top-width: 105px; border-bottom-width: 105px; }
             .front-flap { border-left-width: 145px; border-right-width: 145px; border-top-width: 115px; }
             .wax-seal { top: 95px; }
-            .main-title { font-size: 48px; }
-            .invitation-frame { padding: 30px 20px; }
+            .main-title { font-size: 52px; }
+            .invitation-frame { padding: 35px 20px; }
         }
     </style>
 </head>
 <body>
 
-    <audio id="song" src="song.mp3" loop preload="auto"></audio>
+    <audio id="song" src="assets/song.mp3" loop preload="auto"></audio>
+
+    <button id="music-control-btn" onclick="toggleMusic()" aria-label="Control de música">
+        <svg id="music-icon" viewBox="0 0 24 24">
+            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+        </svg>
+    </button>
 
     <div id="envelope-screen">
         <div class="envelope-wrapper" onclick="openEnvelope()">
@@ -595,9 +621,9 @@
                     
                     <div class="map-card" style="margin-bottom: 20px;">
                         <div style="font-family: 'Cinzel', serif; font-size: 11px; color: var(--text-light); font-weight: 600; letter-spacing: 1px; margin-bottom: 3px;">
-                            Ceremonia: <span style="font-family: 'Montserrat', sans-serif; font-weight: 500; color: var(--text-muted);">Capilla de Santa Teresita</span>
+                            Ceremonia: <span style="font-family: 'Montserrat', sans-serif; font-weight: 600; color: var(--text-muted);">Capilla de Santa Teresita</span>
                         </div>
-                        <div style="font-family: 'Montserrat', sans-serif; font-size: 12px; color: var(--text-light); opacity: 0.8; line-height: 1.4; margin-bottom: 5px;">
+                        <div style="font-family: 'Montserrat', sans-serif; font-size: 13px; color: var(--text-light); opacity: 0.9; line-height: 1.4; margin-bottom: 5px; font-weight: 400;">
                             (Colegio Santa Teresita) C. Santander 16, San Rafael, Azcapotzalco, 02010
                         </div>
                         <div class="map-wrapper">
@@ -610,9 +636,9 @@
 
                     <div class="map-card">
                         <div style="font-family: 'Cinzel', serif; font-size: 11px; color: var(--text-light); font-weight: 600; letter-spacing: 1px; margin-bottom: 3px;">
-                            Recepción: <span style="font-family: 'Montserrat', sans-serif; font-weight: 500; color: var(--text-muted);">Salón Melody</span>
+                            Recepción: <span style="font-family: 'Montserrat', sans-serif; font-weight: 600; color: var(--text-muted);">Salón Melody</span>
                         </div>
-                        <div style="font-family: 'Montserrat', sans-serif; font-size: 12px; color: var(--text-light); opacity: 0.8; line-height: 1.4; margin-bottom: 5px;">
+                        <div style="font-family: 'Montserrat', sans-serif; font-size: 13px; color: var(--text-light); opacity: 0.9; line-height: 1.4; margin-bottom: 5px; font-weight: 400;">
                             Av. Morelos 49C, San Andres, Azcapotzalco, 02240
                         </div>
                         <div class="map-wrapper">
@@ -628,8 +654,8 @@
 
                 <div class="info-block">
                     <div class="info-label">Código de Vestimenta</div>
-                    <div class="info-value-main" style="font-size: 18px; letter-spacing: 4px;">Formal</div>
-                    <div class="info-value-sub" style="font-style: italic; font-size: 13px; color: #b07d83; margin-top: 5px;">
+                    <div class="info-value-main" style="font-size: 19px; letter-spacing: 4px;">Formal</div>
+                    <div class="info-value-sub" style="font-style: italic; font-size: 14px; color: #a4636b; margin-top: 6px; font-weight: 500;">
                         Reservando el color rosa para la festejada
                     </div>
                 </div>
@@ -638,7 +664,7 @@
 
                 <div class="info-block">
                     <div class="info-label">Mesa de Regalos</div>
-                    <div class="info-value-sub" style="font-size: 13px; color: var(--text-muted); font-style: italic;">
+                    <div class="info-value-sub" style="font-size: 14px; color: var(--text-muted); font-style: italic; font-weight: 500;">
                         Información en proceso
                     </div>
                 </div>
@@ -646,39 +672,36 @@
 
             <div class="divider"></div>
 
-            <div class="section-tag">Galería de Momentos</div>
-            <div class="gallery-container">
-                <div class="carousel-track" id="gallery-carousel">
-                    <div class="carousel-slide"><img src="assets/galeria1.jpg" alt="Paula 1"></div>
-                    <div class="carousel-slide"><img src="assets/galeria2.jpg" alt="Paula 2"></div>
-                    <div class="carousel-slide"><img src="assets/galeria3.jpg" alt="Paula 3"></div>
-                    <div class="carousel-slide"><img src="assets/galeria4.jpg" alt="Paula 4"></div>
-                    <div class="carousel-slide"><img src="assets/galeria5.jpg" alt="Paula 5"></div>
-                    <div class="carousel-slide"><img src="assets/galeria6.jpg" alt="Paula 6"></div>
-                </div>
-                <div class="carousel-dots">
-                    <span class="dot active"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                </div>
-            </div>
-
-            <p class="phrase" style="font-size: 16px; margin-top: 10px; margin-bottom: 25px;">
+            <p class="phrase" style="font-size: 17px; margin-top: 10px; margin-bottom: 10px;">
                 "Que estos quince años que hoy comienzo a vivir sean el reflejo de mis más hermosos sueños, guiados siempre por el amor de mi familia y la alegría de compartir la vida con amigos tan especiales como ustedes."
             </p>
 
             <div class="divider"></div>
             
             <div class="section-tag">Confirmación</div>
-            <p style="font-size: 13px; font-family: 'Montserrat', sans-serif; font-weight: 400; opacity: 0.9; margin-bottom: 5px;">
-                Agradecemos confirmar tu asistencia antes del evento.
+            <p style="font-size: 13px; font-family: 'Montserrat', sans-serif; font-weight: 500; opacity: 0.9; margin-bottom: 15px;">
+                Agradecemos confirmar tu asistencia completando tus datos a continuación:
             </p>
-            <a href="https://wa.me/521234567890?text=%C2%A1Hola%21%20Confirmo%20mi%20asistencia%20al%20evento%20de%20los%20XV%20A%C3%B1os%20de%20Paula%20Garc%C3%ADa%20Calixto." target="_blank" class="btn-whatsapp">
-                Confirmar por WhatsApp
-            </a>
+
+            <div class="rsvp-form">
+                <div class="form-group">
+                    <label class="form-label" for="guest-name">Nombre Completo</label>
+                    <input type="text" id="guest-name" class="form-input" placeholder="Escribe tu nombre">
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="guest-count">¿Cuántas personas asisten?</label>
+                    <select id="guest-count" class="form-select">
+                        <option value="1">1 Persona</option>
+                        <option value="2">2 Personas</option>
+                        <option value="3">3 Personas</option>
+                        <option value="4">4 Personas</option>
+                    </select>
+                </div>
+
+                <button onclick="sendConfirmationViaWhatsApp()" class="btn-whatsapp">
+                    Confirmar por WhatsApp
+                </button>
+            </div>
 
             <div class="divider"></div>
             
@@ -689,39 +712,82 @@
     </main>
 
     <script>
+        let isPlaying = false;
+
         function openEnvelope() {
             const wrapper = document.querySelector('.envelope-wrapper');
             const screen = document.getElementById('envelope-screen');
             const audio = document.getElementById('song');
+            const musicBtn = document.getElementById('music-control-btn');
             
             wrapper.classList.add('open');
             
-            // Intento de reproducción de audio tras acción del usuario
+            // Forzar reproducción inmediata al interactuar para abrir
             if (audio) {
-                audio.play().catch(error => {
-                    console.log("La reproducción automática de audio requiere interacción previa en este navegador:", error);
+                audio.play().then(() => {
+                    isPlaying = true;
+                    updateMusicIcon();
+                }).catch(error => {
+                    console.log("Audio bloqueado temporalmente por políticas del navegador:", error);
                 });
             }
             
             setTimeout(() => {
                 screen.classList.add('fade-out');
                 document.body.classList.add('content-active');
+                if (musicBtn) musicBtn.classList.add('visible');
                 createFlowerPetals();
             }, 1200);
         }
 
-        // Lógica de navegación visual en dots del carrusel infinito/deslizable
-        const track = document.getElementById('gallery-carousel');
-        const dots = document.querySelectorAll('.dot');
-        
-        if (track && dots.length > 0) {
-            track.addEventListener('scroll', () => {
-                const index = Math.round(track.scrollLeft / (track.offsetWidth * 0.75));
-                dots.forEach((dot, i) => {
-                    if (i === index) dot.classList.add('active');
-                    else dot.classList.remove('active');
-                });
-            });
+        // Función para pausar / reanudar música desde el botón sticky flotante
+        function toggleMusic() {
+            const audio = document.getElementById('song');
+            if (!audio) return;
+
+            if (isPlaying) {
+                audio.pause();
+                isPlaying = false;
+            } else {
+                audio.play().catch(err => console.log(err));
+                isPlaying = true;
+            }
+            updateMusicIcon();
+        }
+
+        function updateMusicIcon() {
+            const icon = document.getElementById('music-icon');
+            if (!icon) return;
+
+            if (isPlaying) {
+                // Icono de Pausa
+                icon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+            } else {
+                // Icono de Play
+                icon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+            }
+        }
+
+        // Generador dinámico de mensaje y redirección segura de WhatsApp
+        function sendConfirmationViaWhatsApp() {
+            const nameInput = document.getElementById('guest-name');
+            const countSelect = document.getElementById('guest-count');
+            
+            if (!nameInput || !nameInput.value.trim()) {
+                alert('Por favor, ingresa tu nombre completo para realizar la confirmación.');
+                nameInput.focus();
+                return;
+            }
+
+            const name = nameInput.value.trim();
+            const passengers = countSelect.value;
+            const phoneNumber = "525583815508";
+            
+            // Construcción pulida y formal del mensaje
+            const message = `¡Hola! Confirmo mi asistencia al evento de los XV Años de Paula García Calixto.\n\n• Nombre: ${name}\n• Lugares sugeridos/asistentes: ${passengers}`;
+            
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
         }
 
         // Lógica precisa de la Cuenta Atrás hacia el 5 de Septiembre de 2026
@@ -748,7 +814,7 @@
             document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
         }, 1000);
 
-        // Generador de lluvia de pétalos de flores (Tonos pastel luminosos)
+        // Generador estético de lluvia de pétalos de flores
         function createFlowerPetals() {
             const container = document.getElementById('lanterns-container');
             const count = 25; 
