@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis XV Años - Paula</title>
+    <title>Mis XV Años - Paula García Calixto</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Pinyon+Script&family=Montserrat:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;1,400;1,600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -178,7 +178,6 @@
         /* Contenido de la Invitación Principal */
         #main-invitation {
             min-height: 100vh;
-            /* RUTA CORREGIDA HACIA LA CARPETA ASSETS */
             background: url('assets/imagen.jpg') no-repeat center center;
             background-size: cover;
             background-attachment: fixed;
@@ -204,7 +203,6 @@
             padding: 40px 30px;
             text-align: center;
             position: relative;
-            /* Cristalizado mucho más transparente para lucir la foto de fondo */
             background: rgba(255, 250, 252, 0.65); 
             box-shadow: 0 15px 35px rgba(89, 74, 78, 0.15);
             backdrop-filter: blur(5px);
@@ -238,9 +236,18 @@
             font-family: 'Pinyon Script', cursive;
             font-size: 65px;
             color: var(--text-light);
-            margin-bottom: 15px;
+            margin-bottom: 5px;
             text-shadow: 0 2px 5px rgba(255, 255, 255, 0.6);
             line-height: 1.1;
+        }
+
+        .full-name {
+            font-family: 'Cinzel', serif;
+            font-size: 12px;
+            letter-spacing: 3px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            font-weight: 600;
         }
 
         .phrase {
@@ -295,6 +302,74 @@
             letter-spacing: 1px;
         }
 
+        .family-names {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 19px;
+            font-weight: 500;
+            color: var(--text-light);
+            line-height: 1.5;
+            margin-top: 5px;
+        }
+
+        /* Estilos de la Sección de Galería Deslizable */
+        .gallery-container {
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+            margin: 20px 0;
+        }
+
+        .carousel-track {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+            gap: 12px;
+            padding: 10px 0;
+        }
+
+        .carousel-track::-webkit-scrollbar {
+            display: none;
+        }
+
+        .carousel-slide {
+            flex: 0 0 75%;
+            scroll-snap-align: center;
+            aspect-ratio: 3 / 4;
+            border-radius: 4px;
+            overflow: hidden;
+            border: 1px solid rgba(213, 189, 175, 0.4);
+            box-shadow: 0 8px 20px rgba(89, 74, 78, 0.1);
+        }
+
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .carousel-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
+
+        .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--gold-primary);
+            opacity: 0.3;
+            transition: opacity 0.3s ease;
+        }
+
+        .dot.active {
+            opacity: 1;
+        }
+
         /* Estilos de la Cuenta Atrás */
         .countdown-grid {
             display: flex;
@@ -330,7 +405,7 @@
 
         /* Ficha de Recepción y Mapa */
         .map-card {
-            margin-top: 20px;
+            margin-top: 15px;
             border: 1px solid rgba(213, 189, 175, 0.4);
             background: rgba(255, 255, 255, 0.7);
             padding: 15px;
@@ -340,7 +415,7 @@
 
         .map-wrapper {
             width: 100%;
-            height: 200px;
+            height: 180px;
             margin-top: 12px;
             border-radius: 4px;
             overflow: hidden;
@@ -428,12 +503,12 @@
 </head>
 <body>
 
-    <!-- Pantalla del Sobre -->
+    <audio id="song" src="song.mp3" loop preload="auto"></audio>
+
     <div id="envelope-screen">
         <div class="envelope-wrapper" onclick="openEnvelope()">
             <div class="front-flap"></div>
             <div class="wax-seal">
-                <!-- Icono de Corona de Princesa EXACTO -->
                 <svg viewBox="0 0 24 24">
                     <path d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.55 18.55 20 18 20H6C5.45 20 5 19.55 5 19V18H19V19Z"/>
                 </svg>
@@ -444,14 +519,11 @@
         </div>
     </div>
 
-    <!-- Contenido de la Invitación Principal -->
     <main id="main-invitation">
-        <!-- Contenedor para los pétalos de flores dinámicos -->
         <div id="lanterns-container" style="position: absolute; top:0; left:0; width:100%; height:100%; overflow:hidden; pointer-events:none; z-index:1;"></div>
 
         <div class="invitation-frame" style="z-index: 2;">
             <div class="lotus-header">
-                <!-- Icono de Corona de Princesa EXACTO -->
                 <svg viewBox="0 0 24 24">
                     <path d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.55 18.55 20 18 20H6C5.45 20 5 19.55 5 19V18H19V19Z"/>
                 </svg>
@@ -459,6 +531,7 @@
 
             <div class="section-tag">Mis XV Años</div>
             <h1 class="main-title">Paula</h1>
+            <div class="full-name">Paula García Calixto</div>
             
             <p class="phrase">
                 "Hoy empieza una nueva etapa mágica en mi vida, llena de ilusiones y momentos que deseo conservar por siempre. Quiero compartir esta noche tan especial con las personas que más quiero."
@@ -466,7 +539,24 @@
 
             <div class="divider"></div>
 
-            <!-- Ficha de Cuenta Atrás -->
+            <div class="info-block">
+                <div class="info-label">Con la bendición de mis padres</div>
+                <div class="family-names">
+                    Nancy Calixto García<br>
+                    Norberto García Hernández
+                </div>
+            </div>
+
+            <div class="info-block">
+                <div class="info-label">Mis Padrinos</div>
+                <div class="family-names">
+                    Angel Humberto Calixto García<br>
+                    Yarisnay Rivera Espinosa
+                </div>
+            </div>
+
+            <div class="divider"></div>
+
             <div class="section-tag">Cuenta Atrás</div>
             <div class="countdown-grid" id="countdown-timer">
                 <div class="countdown-item">
@@ -493,39 +583,100 @@
                 <div class="info-block">
                     <div class="info-label">Fecha</div>
                     <div class="info-value-main">05.SEP.2026</div>
-                    <div class="info-value-sub">Sábado • 18:00 Hrs</div>
+                    <div class="info-value-sub">Sábado • Horario por definir</div>
                 </div>
 
                 <div class="divider"></div>
 
-                <!-- Ficha de Recepción Interactiva -->
                 <div class="info-block">
-                    <div class="info-label">Ubicación</div>
-                    <div class="info-value-main">CDMX</div>
-                    <div class="info-value-sub">Delegación Azcapotzalco</div>
+                    <div class="info-label">Ubicaciones</div>
+                    <div class="info-value-main">Azcapotzalco</div>
+                    <div class="info-value-sub">Ciudad de México</div>
                     
-                    <div class="map-card">
-                        <div style="font-family: 'Cinzel', serif; font-size: 11px; color: var(--text-light); font-weight: 600; letter-spacing: 1px;">
-                            Salón de Eventos: <span style="font-family: 'Montserrat', sans-serif; font-weight: 400; color: var(--text-muted);">Por definir</span>
+                    <div class="map-card" style="margin-bottom: 20px;">
+                        <div style="font-family: 'Cinzel', serif; font-size: 11px; color: var(--text-light); font-weight: 600; letter-spacing: 1px; margin-bottom: 3px;">
+                            Ceremonia: <span style="font-family: 'Montserrat', sans-serif; font-weight: 500; color: var(--text-muted);">Capilla de Santa Teresita</span>
+                        </div>
+                        <div style="font-family: 'Montserrat', sans-serif; font-size: 12px; color: var(--text-light); opacity: 0.8; line-height: 1.4; margin-bottom: 5px;">
+                            (Colegio Santa Teresita) C. Santander 16, San Rafael, Azcapotzalco, 02010
                         </div>
                         <div class="map-wrapper">
                             <iframe 
-                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.536737517173!2d-99.1913166247844!3d19.48191458180749!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f9a6568cb1a9%3A0x2db4a5b28cb7e696!2sAzcapotzalco%2C%20CDMX!5e0!3m2!1ses!2smx!4v1710000000000!5m2!1ses!2smx" 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.5457049445194!2d-99.1765876!3d19.4751855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f9ce0691b059%3A0xc4eb0ea5fcefe662!2sColegio%20Santa%20Teresita!5e0!3m2!1ses-419!2smx!4v1716410000000!5m2!1ses-419!2smx" 
+                                width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                            </iframe>
+                        </div>
+                    </div>
+
+                    <div class="map-card">
+                        <div style="font-family: 'Cinzel', serif; font-size: 11px; color: var(--text-light); font-weight: 600; letter-spacing: 1px; margin-bottom: 3px;">
+                            Recepción: <span style="font-family: 'Montserrat', sans-serif; font-weight: 500; color: var(--text-muted);">Salón Melody</span>
+                        </div>
+                        <div style="font-family: 'Montserrat', sans-serif; font-size: 12px; color: var(--text-light); opacity: 0.8; line-height: 1.4; margin-bottom: 5px;">
+                            Av. Morelos 49C, San Andres, Azcapotzalco, 02240
+                        </div>
+                        <div class="map-wrapper">
+                            <iframe 
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.4285741914175!2d-99.1863583!3d19.4802422!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f99be44983a5%3A0x7be9265f2a1ecf94!2sAv.%20Morelos%2049%2C%20San%20Andres%2C%20Azcapotzalco%2C%2002240%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses-419!2smx!4v1716410100000!5m2!1ses-419!2smx" 
                                 width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
                             </iframe>
                         </div>
                     </div>
                 </div>
+
+                <div class="divider"></div>
+
+                <div class="info-block">
+                    <div class="info-label">Código de Vestimenta</div>
+                    <div class="info-value-main" style="font-size: 18px; letter-spacing: 4px;">Formal</div>
+                    <div class="info-value-sub" style="font-style: italic; font-size: 13px; color: #b07d83; margin-top: 5px;">
+                        Reservando el color rosa para la festejada
+                    </div>
+                </div>
+
+                <div class="divider"></div>
+
+                <div class="info-block">
+                    <div class="info-label">Mesa de Regalos</div>
+                    <div class="info-value-sub" style="font-size: 13px; color: var(--text-muted); font-style: italic;">
+                        Información en proceso
+                    </div>
+                </div>
             </div>
 
             <div class="divider"></div>
+
+            <div class="section-tag">Galería de Momentos</div>
+            <div class="gallery-container">
+                <div class="carousel-track" id="gallery-carousel">
+                    <div class="carousel-slide"><img src="assets/galeria1.jpg" alt="Paula 1"></div>
+                    <div class="carousel-slide"><img src="assets/galeria2.jpg" alt="Paula 2"></div>
+                    <div class="carousel-slide"><img src="assets/galeria3.jpg" alt="Paula 3"></div>
+                    <div class="carousel-slide"><img src="assets/galeria4.jpg" alt="Paula 4"></div>
+                    <div class="carousel-slide"><img src="assets/galeria5.jpg" alt="Paula 5"></div>
+                    <div class="carousel-slide"><img src="assets/galeria6.jpg" alt="Paula 6"></div>
+                </div>
+                <div class="carousel-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+
+            <p class="phrase" style="font-size: 16px; margin-top: 10px; margin-bottom: 25px;">
+                "Que estos quince años que hoy comienzo a vivir sean el reflejo de mis más hermosos sueños, guiados siempre por el amor de mi familia y la alegría de compartir la vida con amigos tan especiales como ustedes."
+            </p>
+
+            <div class="divider"></div>
             
-            <!-- Sección de Confirmación -->
             <div class="section-tag">Confirmación</div>
             <p style="font-size: 13px; font-family: 'Montserrat', sans-serif; font-weight: 400; opacity: 0.9; margin-bottom: 5px;">
                 Agradecemos confirmar tu asistencia antes del evento.
             </p>
-            <a href="https://wa.me/521234567890?text=¡Hola!%20Confirmo%20mi%20asistencia%20al%20evento%20de%20los%20XV%20Años%20de%20Paula." target="_blank" class="btn-whatsapp">
+            <a href="https://wa.me/521234567890?text=%C2%A1Hola%21%20Confirmo%20mi%20asistencia%20al%20evento%20de%20los%20XV%20A%C3%B1os%20de%20Paula%20Garc%C3%ADa%20Calixto." target="_blank" class="btn-whatsapp">
                 Confirmar por WhatsApp
             </a>
 
@@ -541,14 +692,36 @@
         function openEnvelope() {
             const wrapper = document.querySelector('.envelope-wrapper');
             const screen = document.getElementById('envelope-screen');
+            const audio = document.getElementById('song');
             
             wrapper.classList.add('open');
+            
+            // Intento de reproducción de audio tras acción del usuario
+            if (audio) {
+                audio.play().catch(error => {
+                    console.log("La reproducción automática de audio requiere interacción previa en este navegador:", error);
+                });
+            }
             
             setTimeout(() => {
                 screen.classList.add('fade-out');
                 document.body.classList.add('content-active');
                 createFlowerPetals();
             }, 1200);
+        }
+
+        // Lógica de navegación visual en dots del carrusel infinito/deslizable
+        const track = document.getElementById('gallery-carousel');
+        const dots = document.querySelectorAll('.dot');
+        
+        if (track && dots.length > 0) {
+            track.addEventListener('scroll', () => {
+                const index = Math.round(track.scrollLeft / (track.offsetWidth * 0.75));
+                dots.forEach((dot, i) => {
+                    if (i === index) dot.classList.add('active');
+                    else dot.classList.remove('active');
+                });
+            });
         }
 
         // Lógica precisa de la Cuenta Atrás hacia el 5 de Septiembre de 2026
@@ -590,7 +763,6 @@
                 const animDuration = Math.random() * 10 + 7; 
                 const animDelay = Math.random() * 6;
                 
-                // Rosas pastel súper suaves
                 const pastelPinks = ['#ffd1dc', '#ffe4e1', '#ffb6c1', '#fff0f5'];
                 const selectedPink = pastelPinks[Math.floor(Math.random() * pastelPinks.length)];
                 
