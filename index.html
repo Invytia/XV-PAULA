@@ -203,7 +203,6 @@
             padding: 45px 30px;
             text-align: center;
             position: relative;
-            /* Mayor opacidad de fondo para excelente lectura */
             background: rgba(255, 253, 254, 0.88); 
             box-shadow: 0 15px 35px rgba(89, 74, 78, 0.15);
             backdrop-filter: blur(8px);
@@ -532,7 +531,7 @@
     </button>
 
     <div id="envelope-screen">
-        <div class="envelope-wrapper" onclick="openEnvelope()">
+        <div class="envelope-wrapper">
             <div class="front-flap"></div>
             <div class="wax-seal">
                 <svg viewBox="0 0 24 24">
@@ -714,21 +713,37 @@
     <script>
         let isPlaying = false;
 
+        // Listener dinámico nativo para saltarse el bloqueo estricto de audio móvil
+        document.addEventListener('DOMContentLoaded', () => {
+            const wrapper = document.querySelector('.envelope-wrapper');
+            if (wrapper) {
+                // Escuchamos clics y eventos táctiles directamente desde la API del DOM
+                ['click', 'touchstart'].forEach(eventName => {
+                    wrapper.addEventListener(eventName, (e) => {
+                        // Evita ejecuciones dobles accidentales en pantallas táctiles
+                        if (e.type === 'click' && 'ontouchstart' in window) return;
+                        openEnvelope();
+                    }, { passive: false });
+                });
+            }
+        });
+
         function openEnvelope() {
             const wrapper = document.querySelector('.envelope-wrapper');
             const screen = document.getElementById('envelope-screen');
             const audio = document.getElementById('song');
             const musicBtn = document.getElementById('music-control-btn');
             
+            if (wrapper.classList.contains('open')) return; // Evitar disparar dos veces
             wrapper.classList.add('open');
             
-            // Forzar reproducción inmediata al interactuar para abrir
+            // INTENTO DE REPRODUCCIÓN INMEDIATA (Firma directa de gesto de usuario)
             if (audio) {
                 audio.play().then(() => {
                     isPlaying = true;
                     updateMusicIcon();
                 }).catch(error => {
-                    console.log("Audio bloqueado temporalmente por políticas del navegador:", error);
+                    console.log("Fallo de reproducción forzada:", error);
                 });
             }
             
@@ -760,15 +775,13 @@
             if (!icon) return;
 
             if (isPlaying) {
-                // Icono de Pausa
-                icon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
+                icon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>'; // Icono Pausa
             } else {
-                // Icono de Play
-                icon.innerHTML = '<path d="M8 5v14l11-7z"/>';
+                icon.innerHTML = '<path d="M8 5v14l11-7z"/>'; // Icono Play
             }
         }
 
-        // Generador dinámico de mensaje y redirección segura de WhatsApp
+        // Generador dinámico de mensaje y redirección segura de WhatsApp al número exacto
         function sendConfirmationViaWhatsApp() {
             const nameInput = document.getElementById('guest-name');
             const countSelect = document.getElementById('guest-count');
@@ -783,14 +796,13 @@
             const passengers = countSelect.value;
             const phoneNumber = "525583815508";
             
-            // Construcción pulida y formal del mensaje
             const message = `¡Hola! Confirmo mi asistencia al evento de los XV Años de Paula García Calixto.\n\n• Nombre: ${name}\n• Lugares sugeridos/asistentes: ${passengers}`;
             
             const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
         }
 
-        // Lógica precisa de la Cuenta Atrás hacia el 5 de Septiembre de 2026
+        // Lógica de la Cuenta Atrás hacia el 5 de Septiembre de 2026
         const targetDate = new Date("September 5, 2026 00:00:00").getTime();
 
         const countdownInterval = setInterval(function() {
@@ -814,7 +826,7 @@
             document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
         }, 1000);
 
-        // Generador estético de lluvia de pétalos de flores
+        // Generador de lluvia de pétalos de flores
         function createFlowerPetals() {
             const container = document.getElementById('lanterns-container');
             const count = 25; 
