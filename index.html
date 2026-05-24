@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mis XV Años - García Calixto</title>
+    <title>Mis XV Años - Paula García Calixto</title>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Pinyon+Script&family=Montserrat:wght@300;400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;1,400;1,600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -556,7 +556,7 @@
 
             <div class="section-tag">Mis XV Años</div>
             <h1 class="main-title">Paula</h1>
-            <div class="full-name">Paula García Calixto</div>
+            <div class="full-name">García Calixto</div>
             
             <p class="phrase">
                 "Hoy empieza una nueva etapa mágica en mi vida, llena de ilusiones y momentos que deseo conservar por siempre. Quiero compartir esta noche tan especial con las personas que más quiero."
@@ -687,15 +687,6 @@
                     <label class="form-label" for="guest-name">Nombre Completo</label>
                     <input type="text" id="guest-name" class="form-input" placeholder="Escribe tu nombre">
                 </div>
-                <div class="form-group">
-                    <label class="form-label" for="guest-count">¿Cuántas personas asisten?</label>
-                    <select id="guest-count" class="form-select">
-                        <option value="1">1 Persona</option>
-                        <option value="2">2 Personas</option>
-                        <option value="3">3 Personas</option>
-                        <option value="4">4 Personas</option>
-                    </select>
-                </div>
 
                 <button onclick="sendConfirmationViaWhatsApp()" class="btn-whatsapp">
                     Confirmar por WhatsApp
@@ -784,7 +775,6 @@
         // Generador dinámico de mensaje y redirección segura de WhatsApp al número exacto
         function sendConfirmationViaWhatsApp() {
             const nameInput = document.getElementById('guest-name');
-            const countSelect = document.getElementById('guest-count');
             
             if (!nameInput || !nameInput.value.trim()) {
                 alert('Por favor, ingresa tu nombre completo para realizar la confirmación.');
@@ -793,10 +783,9 @@
             }
 
             const name = nameInput.value.trim();
-            const passengers = countSelect.value;
             const phoneNumber = "525583815508";
             
-            const message = `¡Hola! Confirmo mi asistencia al evento de los XV Años de Paula García Calixto.\n\n• Nombre: ${name}\n• Lugares sugeridos/asistentes: ${passengers}`;
+            const message = `¡Hola! Confirmo mi asistencia al evento de los XV Años de Paula García Calixto.\n\n• Nombre: ${name}`;
             
             const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
