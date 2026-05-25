@@ -508,7 +508,7 @@
 
         }
 
-        .envelope-wrapper.open .wax-seal-text-svg {
+        .envelope-wrapper.open svg[viewBox="0 0 160 160"] {
 
             opacity: 0;
 
@@ -1328,33 +1328,13 @@
                 <div class="envelope-flap"></div>
             </div>
 
-            <!-- Sello de cera con texto curvo -->
-            <div class="wax-seal" style="position:absolute; top: 140px; left: 50%; transform: translateX(-50%);">
+            <!-- Sello de cera -->
+            <div class="wax-seal" style="position:absolute; top: 141px; left: 50%; transform: translateX(-50%);">
                 <div class="wax-seal-inner">
                     <span class="wax-seal-letter">P</span>
-                    <span class="wax-seal-subtitle">XV Años</span>
+                    <span class="wax-seal-subtitle">XV AÑOS</span>
                 </div>
             </div>
-
-            <!-- Texto SVG curvo alrededor del sello -->
-            <svg class="wax-seal-text-svg" style="position:absolute; top:113px; left:50%; transform:translateX(-50%); width:110px; height:110px; z-index:7; pointer-events:none;" viewBox="0 0 110 110">
-                <defs>
-                    <path id="circle-top" d="M 55,55 m -38,0 a 38,38 0 1,1 76,0" />
-                    <path id="circle-bottom" d="M 55,55 m -38,0 a 38,38 0 0,0 76,0" />
-                </defs>
-                <text>
-                    <textPath href="#circle-top" startOffset="8%"
-                        style="font-family:'Cinzel',serif; font-size:8px; letter-spacing:3.5px; fill:#8f2a44; font-weight:600;">
-                        TOCA PARA ABRIR
-                    </textPath>
-                </text>
-                <text>
-                    <textPath href="#circle-bottom" startOffset="18%"
-                        style="font-family:'Cinzel',serif; font-size:8px; letter-spacing:3.5px; fill:#8f2a44; font-weight:600;">
-                        • MIS XV AÑOS •
-                    </textPath>
-                </text>
-            </svg>
 
             <div class="envelope-text">Paula García Calixto</div>
             <div class="hint-text">Toca el sello para abrir</div>
