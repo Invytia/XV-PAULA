@@ -1,1107 +1,520 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mis XV Años - Paula García Calixto</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@300;400;500;600&family=Pinyon+Script&family=Montserrat:wght@300;400;500&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-<style>
-
-:root{
-    --rosa:#c97d90;
-    --rosa-dark:#9c5d6d;
-    --rosa-soft:#f8e8ec;
-    --rosa-soft-2:#f4dde3;
-    --texto:#403336;
-    --texto-soft:#7e6b70;
-}
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html,body{
-    width:100%;
-    overflow-x:hidden;
-    font-family:'Cormorant Garamond',serif;
-    background:#fff7f8;
-    color:var(--texto);
-}
-
-/* ================= SOBRE ================= */
-
-#envelope-screen{
-    position:fixed;
-    inset:0;
-    width:100%;
-    height:100%;
-    background:url('assets/imagen.jpg') center/cover no-repeat;
-    z-index:9999;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
-    transition:1.2s;
-}
-
-#envelope-screen::before{
-    content:'';
-    position:absolute;
-    inset:0;
-    background:rgba(255,245,247,.45);
-    backdrop-filter:blur(2px);
-}
-
-#envelope-screen.fade-out{
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-}
-
-.envelope-wrapper{
-    position:relative;
-    z-index:2;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    cursor:pointer;
-}
-
-.envelope-body{
-    width:320px;
-    height:220px;
-    background:linear-gradient(145deg,#fff,#f7f1f2);
-    position:relative;
-    border-radius:4px;
-    box-shadow:0 20px 50px rgba(0,0,0,.12);
-    overflow:hidden;
-}
-
-.envelope-left{
-    position:absolute;
-    left:0;
-    bottom:0;
-    width:0;
-    height:0;
-    border-left:160px solid #ecd7dc;
-    border-top:110px solid transparent;
-    border-bottom:110px solid #ecd7dc;
-}
-
-.envelope-right{
-    position:absolute;
-    right:0;
-    bottom:0;
-    width:0;
-    height:0;
-    border-right:160px solid #e5cfd5;
-    border-top:110px solid transparent;
-    border-bottom:110px solid #e5cfd5;
-}
-
-.envelope-bottom{
-    position:absolute;
-    bottom:0;
-    left:0;
-    width:0;
-    height:0;
-    border-left:160px solid transparent;
-    border-right:160px solid transparent;
-    border-bottom:115px solid #f5ebee;
-}
-
-.envelope-flap{
-    position:absolute;
-    top:0;
-    left:-1px;
-    width:322px;
-    height:0;
-    border-left:161px solid transparent;
-    border-right:161px solid transparent;
-    border-top:120px solid #f7eff1;
-    transform-origin:top;
-    transition:.8s;
-    z-index:10;
-}
-
-.envelope-wrapper.open .envelope-flap{
-    transform:rotateX(180deg);
-}
-
-.wax-seal{
-    position:absolute;
-    top:142px;
-    left:50%;
-    transform:translateX(-50%);
-    width:58px;
-    height:58px;
-    border-radius:50%;
-    background:radial-gradient(circle at 35% 35%,#f6c8d2,#c25c76);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    color:white;
-    font-family:'Pinyon Script',cursive;
-    font-size:30px;
-    z-index:20;
-    transition:.5s;
-    box-shadow:0 5px 18px rgba(0,0,0,.2);
-}
-
-.envelope-wrapper.open .wax-seal{
-    opacity:0;
-    transform:translateX(-50%) scale(0);
-}
-
-.envelope-title{
-    margin-top:28px;
-    font-family:'Cinzel',serif;
-    letter-spacing:4px;
-    font-size:13px;
-    color:#5d454b;
-    text-transform:uppercase;
-}
-
-.envelope-sub{
-    margin-top:10px;
-    font-family:'Montserrat',sans-serif;
-    font-size:11px;
-    color:#8a6d74;
-    animation:pulse 2s infinite;
-}
-
-@keyframes pulse{
-    0%,100%{opacity:.5}
-    50%{opacity:1}
-}
-
-/* ================= MAIN ================= */
-
-#main-invitation{
-    min-height:100vh;
-    background:url('assets/imagen.jpg') center/cover fixed;
-    display:flex;
-    justify-content:center;
-    padding:60px 18px;
-    opacity:0;
-    transform:translateY(20px);
-    transition:1.2s;
-}
-
-body.content-active #main-invitation{
-    opacity:1;
-    transform:translateY(0);
-}
-
-.invitation-frame{
-    width:100%;
-    max-width:500px;
-    background:rgba(255,255,255,.70);
-    backdrop-filter:blur(10px);
-    border:1px solid rgba(255,255,255,.45);
-    padding:50px 28px;
-    box-shadow:0 15px 45px rgba(0,0,0,.08);
-}
-
-/* ================= TITULOS ================= */
-
-.section-tag{
-    font-family:'Cinzel',serif;
-    letter-spacing:5px;
-    font-size:10px;
-    color:var(--rosa-dark);
-    text-transform:uppercase;
-    margin-bottom:15px;
-    text-align:center;
-}
-
-.main-title{
-    font-family:'Pinyon Script',cursive;
-    font-size:88px;
-    line-height:1;
-    text-align:center;
-    color:#39292d;
-}
-
-.full-name{
-    text-align:center;
-    font-family:'Cinzel',serif;
-    font-size:11px;
-    letter-spacing:5px;
-    text-transform:uppercase;
-    color:var(--rosa-dark);
-    margin-top:8px;
-}
-
-.section-heading{
-    text-align:center;
-    font-family:'Cinzel',serif;
-    font-size:17px;
-    letter-spacing:4px;
-    text-transform:uppercase;
-    color:var(--rosa-dark);
-    margin-bottom:18px;
-}
-
-.section-heading-sm{
-    text-align:center;
-    font-family:'Cinzel',serif;
-    font-size:14px;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    color:var(--rosa-dark);
-    margin-bottom:15px;
-}
-
-/* ================= TEXTOS ================= */
-
-.phrase{
-    margin-top:28px;
-    text-align:center;
-    line-height:1.8;
-    font-size:20px;
-    font-style:italic;
-    color:#544447;
-}
-
-.info-label{
-    text-align:center;
-    font-family:'Cinzel',serif;
-    letter-spacing:4px;
-    text-transform:uppercase;
-    color:var(--rosa-dark);
-    font-size:9px;
-    margin-bottom:10px;
-}
-
-.family-names{
-    text-align:center;
-    font-size:22px;
-    line-height:1.7;
-    font-style:italic;
-}
-
-.info-block{
-    margin-top:25px;
-}
-
-.divider{
-    width:100%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin:32px 0;
-}
-
-.divider::before,
-.divider::after{
-    content:'';
-    flex:1;
-    height:1px;
-    background:linear-gradient(to right,transparent,rgba(156,93,109,.35));
-}
-
-.divider::after{
-    background:linear-gradient(to left,transparent,rgba(156,93,109,.35));
-}
-
-.divider span{
-    width:7px;
-    height:7px;
-    background:var(--rosa);
-    transform:rotate(45deg);
-    margin:0 10px;
-}
-
-/* ================= BLOQUES ================= */
-
-.glass-block{
-    background:rgba(255,255,255,.42);
-    border:1px solid rgba(255,255,255,.55);
-    padding:28px 22px;
-    border-radius:10px;
-    backdrop-filter:blur(7px);
-}
-
-/* ================= COUNTDOWN ================= */
-
-.countdown-grid{
-    display:flex;
-    gap:10px;
-    margin-top:15px;
-}
-
-.countdown-item{
-    flex:1;
-    background:rgba(255,255,255,.55);
-    border-radius:6px;
-    padding:14px 6px;
-    text-align:center;
-}
-
-.countdown-number{
-    font-size:25px;
-    color:var(--rosa-dark);
-    font-family:'Cinzel',serif;
-}
-
-.countdown-label{
-    font-family:'Cinzel',serif;
-    font-size:8px;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    color:var(--texto-soft);
-}
-
-/* ================= CALENDARIO ================= */
-
-.calendar-modern{
-    margin-top:18px;
-    background:rgba(255,255,255,.35);
-    border-radius:10px;
-    padding:22px 18px 20px;
-    border:1px solid rgba(255,255,255,.45);
-}
-
-.calendar-title{
-    display:flex;
-    justify-content:space-between;
-    align-items:flex-end;
-    margin-bottom:25px;
-}
-
-.calendar-month{
-    font-family:'Pinyon Script',cursive;
-    font-size:50px;
-    color:#2f2628;
-}
-
-.calendar-year{
-    font-family:'Cinzel',serif;
-    font-size:16px;
-    color:#7f6c71;
-}
-
-.calendar-days{
-    display:grid;
-    grid-template-columns:repeat(7,1fr);
-    gap:13px 8px;
-}
-
-.day-name{
-    text-align:center;
-    font-family:'Montserrat',sans-serif;
-    font-size:10px;
-    color:#7f6c71;
-    letter-spacing:1px;
-}
-
-.day{
-    text-align:center;
-    font-size:24px;
-    color:#5a4a4d;
-    width:36px;
-    height:36px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    margin:auto;
-}
-
-.day.highlight{
-    border:1.5px solid #3c3234;
-    border-radius:50%;
-}
-
-/* ================= BOTONES ================= */
-
-.btn-calendario,
-.btn-confirmar{
-    width:100%;
-    margin-top:18px;
-    border:none;
-    background:linear-gradient(135deg,var(--rosa-dark),var(--rosa));
-    color:white;
-    padding:15px;
-    border-radius:6px;
-    cursor:pointer;
-    font-family:'Cinzel',serif;
-    letter-spacing:2px;
-    text-transform:uppercase;
-    font-size:10px;
-}
-
-/* ================= MAPAS ================= */
-
-.map-card{
-    margin-top:18px;
-    background:rgba(255,255,255,.6);
-    border-radius:10px;
-    overflow:hidden;
-}
-
-.map-card-header{
-    padding:12px 15px;
-    background:linear-gradient(135deg,var(--rosa-dark),var(--rosa));
-}
-
-.map-card-tipo{
-    display:block;
-    font-family:'Cinzel',serif;
-    font-size:8px;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    color:rgba(255,255,255,.8);
-}
-
-.map-card-nombre{
-    font-size:24px;
-    font-style:italic;
-    color:white;
-}
-
-.map-card-body{
-    padding:14px;
-}
-
-.map-card-direccion{
-    font-family:'Montserrat',sans-serif;
-    font-size:11px;
-    line-height:1.6;
-    color:#6b5b5f;
-    margin-bottom:10px;
-}
-
-.map-wrapper{
-    height:180px;
-    overflow:hidden;
-    border-radius:5px;
-}
-
-/* ================= NUEVO ITINERARIO ================= */
-
-.timeline-modern{
-    margin-top:20px;
-}
-
-.timeline-item{
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    text-align:center;
-    margin-bottom:38px;
-    position:relative;
-}
-
-.timeline-item:not(:last-child)::after{
-    content:'';
-    position:absolute;
-    top:90px;
-    width:1px;
-    height:50px;
-    background:rgba(156,93,109,.25);
-}
-
-.timeline-heart{
-    width:55px;
-    height:55px;
-    margin-bottom:10px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-}
-
-.timeline-heart svg{
-    width:34px;
-    height:34px;
-    fill:none;
-    stroke:#2f2628;
-    stroke-width:1.5;
-}
-
-.timeline-time{
-    font-family:'Cinzel',serif;
-    font-size:17px;
-    color:#322729;
-}
-
-.timeline-event{
-    font-size:18px;
-    font-style:italic;
-    color:#7b676c;
-}
-
-/* ================= RSVP ================= */
-
-.rsvp-intro{
-    text-align:center;
-    line-height:1.7;
-    font-style:italic;
-    font-size:18px;
-    color:#554548;
-}
-
-.rsvp-input-wrap{
-    margin-top:22px;
-}
-
-.rsvp-input-label{
-    display:block;
-    margin-bottom:8px;
-    font-family:'Cinzel',serif;
-    letter-spacing:3px;
-    text-transform:uppercase;
-    color:var(--rosa-dark);
-    font-size:9px;
-}
-
-.rsvp-input{
-    width:100%;
-    padding:14px 16px;
-    border:none;
-    border-radius:6px;
-    background:rgba(255,255,255,.7);
-    font-size:18px;
-    font-family:'Cormorant Garamond',serif;
-    outline:none;
-}
-
-/* ================= FOOTER ================= */
-
-.invitation-footer{
-    margin-top:35px;
-    text-align:center;
-    font-family:'Cinzel',serif;
-    font-size:8px;
-    letter-spacing:3px;
-    color:#8d7b80;
-}
-
-/* ================= RESPONSIVE ================= */
-
-@media(max-width:430px){
-
-.main-title{
-    font-size:72px;
-}
-
-.calendar-month{
-    font-size:42px;
-}
-
-.day{
-    width:32px;
-    height:32px;
-    font-size:21px;
-}
-
-.envelope-body{
-    width:290px;
-    height:200px;
-}
-
-}
-
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis XV Años - Paula García Calixto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@300;400;600;700&family=Pinyon+Script&family=Montserrat:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400;1,600&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --rosa-bloque: rgba(248,215,220,0.55);
+            --rosa-bloque-borde: rgba(200,155,165,0.25);
+            --rosa-bloque-alt: rgba(252,232,236,0.45);
+            --text-deep: #3a2b2f;
+            --text-rose: #a83d58;
+            --text-muted: #7a6065;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body, html {
+            width: 100%; height: 100%;
+            font-family: 'Cormorant Garamond', Georgia, serif;
+            background-color: #fff5f7;
+            color: var(--text-deep);
+            overflow-x: hidden;
+        }
+
+        /* ====== SOBRE ====== */
+        #envelope-screen {
+            position: fixed; top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: url('assets/imagen.jpg');
+            background-size: cover; background-position: center;
+            z-index: 1000;
+            display: flex; justify-content: center; align-items: center;
+            transition: opacity 1.2s ease-in-out, visibility 1.2s;
+            overflow: hidden;
+        }
+        #envelope-screen::before {
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(160deg,rgba(255,240,245,0.55),rgba(245,215,225,0.55));
+            z-index: 0;
+        }
+        #envelope-screen.fade-out { opacity: 0; visibility: hidden; pointer-events: none; }
+        .envelope-wrapper {
+            position: relative; cursor: pointer; z-index: 1;
+            display: flex; flex-direction: column; align-items: center;
+            perspective: 800px;
+        }
+        .envelope-body {
+            position: relative; width: 320px; height: 220px;
+            background: linear-gradient(160deg,#ffffff,#f9f4f0);
+            border-radius: 4px 4px 6px 6px;
+            box-shadow: 0 25px 60px rgba(100,60,80,0.22),0 8px 20px rgba(100,60,80,0.12),inset 0 1px 0 #fff;
+            border: 1px solid rgba(210,185,190,0.5);
+            transition: transform 0.4s ease, box-shadow 0.4s ease; overflow: visible;
+        }
+        .envelope-wrapper:hover .envelope-body { transform: translateY(-4px); box-shadow: 0 35px 80px rgba(100,60,80,0.28),0 12px 30px rgba(100,60,80,0.15),inset 0 1px 0 #fff; }
+        .envelope-left-fold { position:absolute;bottom:0;left:0;width:0;height:0;border-left:160px solid rgba(220,195,200,0.35);border-top:110px solid transparent;border-bottom:110px solid rgba(220,195,200,0.35);border-radius:0 0 0 6px;z-index:1; }
+        .envelope-right-fold { position:absolute;bottom:0;right:0;width:0;height:0;border-right:160px solid rgba(200,175,180,0.3);border-top:110px solid transparent;border-bottom:110px solid rgba(200,175,180,0.3);border-radius:0 0 6px 0;z-index:1; }
+        .envelope-bottom-fold { position:absolute;bottom:0;left:0;width:0;height:0;border-left:160px solid transparent;border-right:160px solid transparent;border-bottom:115px solid rgba(240,225,228,0.5);border-radius:0 0 6px 6px;z-index:2; }
+        .envelope-flap {
+            position:absolute;top:0;left:-1px;width:322px;height:0;
+            border-left:161px solid transparent;border-right:161px solid transparent;border-top:118px solid #f5edf0;
+            transform-origin:top center;transform-style:preserve-3d;
+            transition:transform 0.7s cubic-bezier(0.4,0,0.2,1) 0.1s;z-index:4;
+            filter:drop-shadow(0 3px 6px rgba(100,60,80,0.12));
+        }
+        .envelope-wrapper.open .envelope-flap { transform:rotateX(-175deg);z-index:1; }
+        .wax-seal {
+            position:absolute;top:141px;left:50%;transform:translateX(-50%);
+            width:58px;height:58px;border-radius:50%;z-index:6;
+            display:flex;justify-content:center;align-items:center;
+            transition:transform 0.45s cubic-bezier(0.4,0,0.2,1),opacity 0.35s ease 0.3s;
+            background:radial-gradient(circle at 38% 32%,rgba(255,200,210,0.7) 0%,transparent 45%),radial-gradient(circle,#d4768a 0%,#c0566e 35%,#a83d58 60%,#8f2a44 100%);
+            box-shadow:0 6px 20px rgba(140,50,80,0.35),inset 0 3px 8px rgba(255,180,200,0.4),inset 0 -3px 8px rgba(80,20,40,0.3);
+        }
+        .wax-seal-inner { display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px; }
+        .wax-seal-letter { font-family:'Pinyon Script',cursive;font-size:24px;color:rgba(255,240,245,0.95);line-height:1;text-shadow:0 1px 3px rgba(80,20,40,0.4); }
+        .wax-seal-subtitle { font-family:'Cinzel',serif;font-size:5.5px;color:rgba(255,235,240,0.85);letter-spacing:1.5px;text-transform:uppercase;font-weight:600; }
+        .envelope-wrapper.open .wax-seal { transform:translateX(-50%) scale(0) rotate(20deg);opacity:0; }
+        .envelope-text { margin-top:30px;text-align:center;font-family:'Cinzel',serif;font-size:13px;color:#5a2d3e;letter-spacing:3px;text-transform:uppercase;text-shadow:0 1px 4px rgba(255,255,255,0.7);font-weight:400; }
+        .hint-text { margin-top:10px;text-align:center;font-family:'Montserrat',sans-serif;font-size:11px;color:#7a4050;letter-spacing:1px;opacity:0.8;animation:pulse 2s infinite; }
+
+        /* ====== MAIN ====== */
+        #main-invitation {
+            min-height:100vh;
+            background:url('assets/imagen.jpg') no-repeat center center;
+            background-size:cover;background-attachment:fixed;
+            position:relative;display:flex;flex-direction:column;align-items:center;
+            padding:60px 20px;opacity:0;transform:translateY(20px);
+            transition:opacity 1.5s ease-out 0.6s,transform 1.5s ease-out 0.6s;
+        }
+        body.content-active #main-invitation { opacity:1;transform:translateY(0); }
+
+        /* ====== FRAME CON BRILLOS ====== */
+        .invitation-frame {
+            max-width:500px;width:100%;
+            border:1px solid rgba(195,170,175,0.5);
+            padding:50px 38px;text-align:center;position:relative;
+            background:rgba(255,253,254,0.78);
+            box-shadow:0 15px 40px rgba(89,74,78,0.15),0 0 0 1px rgba(255,255,255,0.6) inset;
+            backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+            border-radius:4px;overflow:visible;
+        }
+        /* Destellos fijos en las esquinas del frame */
+        .frame-sparkle {
+            position:absolute;pointer-events:none;z-index:10;
+        }
+        .frame-sparkle svg { animation:sparkle-pulse 2.5s ease-in-out infinite; }
+        .frame-sparkle:nth-child(1) { top:-10px;left:-10px; }
+        .frame-sparkle:nth-child(2) { top:-10px;right:-10px;animation-delay:0.6s; }
+        .frame-sparkle:nth-child(3) { bottom:-10px;left:-10px;animation-delay:1.2s; }
+        .frame-sparkle:nth-child(4) { bottom:-10px;right:-10px;animation-delay:1.8s; }
+        .frame-sparkle:nth-child(5) { top:50%;left:-12px;transform:translateY(-50%);animation-delay:0.3s; }
+        .frame-sparkle:nth-child(6) { top:50%;right:-12px;transform:translateY(-50%);animation-delay:0.9s; }
+        @keyframes sparkle-pulse {
+            0%,100% { opacity:0.3;transform:scale(0.7) rotate(0deg); }
+            50% { opacity:1;transform:scale(1.1) rotate(20deg); }
+        }
+        .frame-sparkle:nth-child(2) svg,
+        .frame-sparkle:nth-child(4) svg { animation-direction:alternate-reverse; }
+
+        /* ====== TIPOGRAFÍA ====== */
+        .section-heading {
+            font-family:'Cinzel',serif;
+            font-size:18px;
+            font-weight:300;
+            font-style:italic;
+            letter-spacing:4px;
+            color:var(--text-rose);
+            text-transform:uppercase;
+            margin-bottom:16px;
+            line-height:1.3;
+        }
+        .section-heading-sm {
+            font-family:'Cinzel',serif;
+            font-size:14px;
+            font-weight:300;
+            font-style:italic;
+            letter-spacing:3px;
+            color:var(--text-rose);
+            text-transform:uppercase;
+            margin-bottom:12px;
+        }
+        .section-tag {
+            font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:5px;
+            color:var(--text-rose);text-transform:uppercase;margin-bottom:14px;font-weight:400;
+        }
+        .main-title {
+            font-family:'Pinyon Script',cursive;font-size:84px;color:var(--text-deep);
+            margin-bottom:2px;text-shadow:0 1px 3px rgba(255,255,255,0.8);line-height:1;
+        }
+        .full-name { font-family:'Cinzel',serif;font-size:11px;letter-spacing:5px;color:#7a3a47;margin-bottom:30px;font-weight:300;text-transform:uppercase; }
+        .phrase { font-family:'EB Garamond','Cormorant Garamond',serif;font-style:italic;font-size:18px;color:#4a3338;line-height:1.8;margin-bottom:35px;padding:0 10px;font-weight:400; }
+        .family-names { font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;font-style:italic;color:var(--text-deep);line-height:1.75;margin-top:6px; }
+        .info-label { font-family:'Cinzel',serif;font-size:9px;letter-spacing:4px;color:var(--text-rose);text-transform:uppercase;margin-bottom:8px;font-weight:400; }
+        .info-block { margin-bottom:28px; }
+
+        /* ====== DIVIDER ORNATE ====== */
+        .divider-ornate { display:flex;align-items:center;justify-content:center;gap:8px;margin:28px auto; }
+        .divider-ornate::before,.divider-ornate::after { content:'';flex:1;height:1px;background:linear-gradient(to right,transparent,rgba(168,61,88,0.3)); }
+        .divider-ornate::after { background:linear-gradient(to left,transparent,rgba(168,61,88,0.3)); }
+        .divider-ornate-diamond { width:5px;height:5px;background:#c0566e;transform:rotate(45deg);flex-shrink:0; }
+
+        /* ====== COUNTDOWN ====== */
+        .countdown-grid { display:flex;justify-content:center;gap:10px;margin:18px auto 6px auto;max-width:340px; }
+        .countdown-item { flex:1;background:rgba(255,255,255,0.6);border:1px solid rgba(168,61,88,0.12);padding:12px 5px;border-radius:4px;backdrop-filter:blur(6px); }
+        .countdown-number { font-family:'Cinzel',serif;font-size:24px;font-weight:400;color:var(--text-rose);display:block; }
+        .countdown-label { font-family:'Montserrat',sans-serif;font-size:9px;text-transform:uppercase;letter-spacing:2px;color:var(--text-muted);font-weight:500; }
+
+        /* ====== BLOQUES VIDRIO ====== */
+        .bloque-vidrio {
+            background:var(--rosa-bloque);
+            border:1px solid var(--rosa-bloque-borde);
+            border-radius:8px;
+            padding:28px 26px;
+            margin:0 -38px;
+            position:relative;
+            backdrop-filter:blur(6px);
+            -webkit-backdrop-filter:blur(6px);
+        }
+        .bloque-vidrio-alt {
+            background:var(--rosa-bloque-alt);
+            border:1px solid rgba(195,160,170,0.2);
+            border-radius:8px;
+            padding:28px 26px;
+            margin:0 -38px;
+            position:relative;
+            backdrop-filter:blur(6px);
+            -webkit-backdrop-filter:blur(6px);
+        }
+        .bloque-vidrio .info-label,.bloque-vidrio-alt .info-label,
+        .bloque-vidrio .section-tag,.bloque-vidrio-alt .section-tag { color:#7a3a47; }
+        .bloque-vidrio .section-heading,.bloque-vidrio-alt .section-heading,
+        .bloque-vidrio .section-heading-sm,.bloque-vidrio-alt .section-heading-sm { color:#7a3a47; }
+
+        /* ====== CALENDARIO VIDRIO ====== */
+        .calendar-widget {
+            margin-top:16px;
+            background:rgba(255,255,255,0.3);
+            border-radius:8px;overflow:hidden;
+            border:1px solid rgba(168,61,88,0.12);
+            backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+        }
+        .calendar-header {
+            background:rgba(168,61,88,0.75);
+            backdrop-filter:blur(4px);
+            color:#fff;font-family:'Cinzel',serif;font-size:11px;
+            letter-spacing:3px;font-weight:400;text-transform:uppercase;
+            padding:10px 10px 8px;text-align:center;
+        }
+        .calendar-month { font-family:'Cormorant Garamond',serif;font-size:15px;font-style:italic;font-weight:300;letter-spacing:1px;opacity:0.9;margin-top:1px; }
+        .calendar-body { padding:12px 8px 14px; }
+        .calendar-days-header { display:grid;grid-template-columns:repeat(7,1fr);margin-bottom:5px; }
+        .calendar-day-name { font-family:'Cinzel',serif;font-size:8px;font-weight:400;color:rgba(122,58,71,0.8);letter-spacing:0.3px;text-align:center;text-transform:uppercase; }
+        .calendar-grid { display:grid;grid-template-columns:repeat(7,1fr);gap:2px; }
+        .cal-day { font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:400;color:#3a2b2f;text-align:center;padding:5px 2px;line-height:1; }
+        .cal-day.empty { color:transparent; }
+        .cal-day.highlight { background:rgba(168,61,88,0.85);color:#fff;font-weight:600;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;margin:0 auto;box-shadow:0 2px 8px rgba(168,61,88,0.3); }
+        .btn-calendario { display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;margin-top:12px;padding:12px 20px;background:rgba(168,61,88,0.82);color:#fff;border:none;font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:2.5px;text-transform:uppercase;cursor:pointer;transition:all 0.3s ease;font-weight:400;border-radius:4px;backdrop-filter:blur(4px); }
+        .btn-calendario:hover { background:rgba(143,42,68,0.9); }
+        .btn-calendario svg { width:14px;height:14px;fill:#fff;flex-shrink:0; }
+
+        /* ====== MAP CARDS ====== */
+        .map-card { margin-top:14px;border:1px solid rgba(168,61,88,0.12);background:rgba(255,255,255,0.85);border-radius:8px;overflow:hidden;text-align:left;backdrop-filter:blur(4px); }
+        .map-card-header { background:linear-gradient(135deg,rgba(168,61,88,0.85),rgba(192,86,110,0.85));padding:11px 15px;display:flex;flex-direction:column;gap:2px; }
+        .map-card-tipo { font-family:'Cinzel',serif;font-size:7.5px;font-weight:400;letter-spacing:3px;text-transform:uppercase;color:rgba(255,228,232,0.9); }
+        .map-card-nombre { font-family:'Cormorant Garamond',serif;font-size:18px;font-style:italic;font-weight:400;color:#fff;line-height:1.2; }
+        .map-card-body { padding:10px 14px 14px; }
+        .map-card-direccion { font-family:'Montserrat',sans-serif;font-size:11px;font-weight:400;color:var(--text-muted);line-height:1.6;margin-bottom:8px; }
+        .map-wrapper { width:100%;height:175px;border-radius:4px;overflow:hidden;border:1px solid rgba(213,189,175,0.3); }
+
+        /* ====== ITINERARIO NUEVO ====== */
+        .itinerario-timeline {
+            margin-top:20px;
+            position:relative;
+            padding:0 0 0 0;
+        }
+        /* Línea vertical central */
+        .itinerario-timeline::before {
+            content:'';
+            position:absolute;
+            left:50%;
+            top:0; bottom:0;
+            width:1px;
+            background:linear-gradient(to bottom,transparent,rgba(168,61,88,0.35) 8%,rgba(168,61,88,0.35) 92%,transparent);
+            transform:translateX(-50%);
+        }
+        .itin-row {
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            position:relative;
+            margin-bottom:6px;
+            opacity:0;
+            transform:translateY(16px);
+            transition:opacity 0.5s ease,transform 0.5s ease;
+        }
+        .itin-row.visible { opacity:1;transform:translateY(0); }
+
+        .itin-hora {
+            width:calc(50% - 22px);
+            text-align:right;
+            padding-right:14px;
+            font-family:'Cinzel',serif;
+            font-size:9px;
+            font-weight:400;
+            letter-spacing:0.8px;
+            color:rgba(122,58,71,0.9);
+            line-height:1.2;
+            flex-shrink:0;
+        }
+        .itin-node {
+            width:11px;height:11px;
+            border-radius:50%;
+            background:#fff;
+            border:2px solid #c0566e;
+            flex-shrink:0;
+            position:relative;
+            z-index:2;
+            box-shadow:0 0 0 3px rgba(192,86,110,0.12);
+        }
+        .itin-row.itin-main .itin-node {
+            width:15px;height:15px;
+            background:#c0566e;
+            border-color:#8f2a44;
+            box-shadow:0 0 0 4px rgba(168,61,88,0.15);
+        }
+        .itin-evento {
+            width:calc(50% - 22px);
+            padding-left:14px;
+            flex-shrink:0;
+        }
+        .itin-evento-nombre {
+            font-family:'Cormorant Garamond',serif;
+            font-style:italic;
+            font-size:21px;
+            font-weight:400;
+            color:var(--text-deep);
+            line-height:1.1;
+            text-align:left;
+        }
+        .itin-row.itin-main .itin-evento-nombre {
+            font-size:24px;
+            color:var(--text-rose);
+        }
+
+        /* ====== VESTIMENTA ====== */
+        .vestimenta-icons { display:flex;justify-content:center;gap:22px;margin-top:14px; }
+        .vestimenta-icon-item { display:flex;flex-direction:column;align-items:center;gap:6px; }
+        .vestimenta-icon-item svg { width:28px;height:28px;fill:#7a3a47;opacity:0.65; }
+        .vestimenta-icon-label { font-family:'Cinzel',serif;font-size:7.5px;letter-spacing:2px;color:#7a3a47;text-transform:uppercase; }
+
+        /* ====== CONFIRMACIÓN ====== */
+        .rsvp-intro { font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:#4a3338;line-height:1.8;margin-bottom:22px; }
+        .rsvp-input-label { font-family:'Cinzel',serif;font-size:8px;letter-spacing:3px;color:#7a3a47;text-transform:uppercase;font-weight:400;display:block;margin-bottom:8px; }
+        .rsvp-input { width:100%;padding:13px 16px;font-family:'Cormorant Garamond',serif;font-size:17px;font-style:italic;color:var(--text-deep);background:rgba(255,255,255,0.7);border:1px solid rgba(168,61,88,0.2);border-radius:4px;outline:none;transition:border-color 0.3s,box-shadow 0.3s; }
+        .rsvp-input:focus { border-color:#a83d58;box-shadow:0 0 0 3px rgba(168,61,88,0.07); }
+        .rsvp-input::placeholder { font-style:italic;color:rgba(115,96,99,0.45); }
+        .rsvp-input-wrap { margin-bottom:18px; }
+        .btn-confirmar {
+            display:inline-flex;align-items:center;justify-content:center;gap:12px;width:100%;
+            padding:15px 24px;background:linear-gradient(135deg,rgba(168,61,88,0.88),rgba(192,86,110,0.88));
+            color:#fff;border:none;font-family:'Cinzel',serif;font-size:9.5px;letter-spacing:3px;
+            text-transform:uppercase;cursor:pointer;font-weight:400;border-radius:4px;
+            box-shadow:0 5px 18px rgba(168,61,88,0.25);transition:all 0.4s ease;
+            position:relative;overflow:hidden;backdrop-filter:blur(4px);
+        }
+        .btn-confirmar::before { content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);transition:left 0.5s; }
+        .btn-confirmar:hover::before { left:100%; }
+        .btn-confirmar:hover { box-shadow:0 7px 25px rgba(168,61,88,0.35);transform:translateY(-1px); }
+        .btn-confirmar svg { width:17px;height:17px;fill:#fff;flex-shrink:0; }
+
+        /* ====== CANVAS BRILLOS ====== */
+        #glitter-canvas { position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:3;opacity:0;transition:opacity 0.8s; }
+        #glitter-canvas.visible { opacity:1; }
+
+        /* ====== MÚSICA ====== */
+        #music-control-btn {
+            position:fixed;bottom:25px;right:25px;width:48px;height:48px;border-radius:50%;
+            background:rgba(58,43,47,0.85);border:1px solid rgba(255,255,255,0.2);color:#fff;
+            display:flex;justify-content:center;align-items:center;cursor:pointer;z-index:999;
+            box-shadow:0 4px 15px rgba(89,74,78,0.3);opacity:0;visibility:hidden;
+            transition:opacity 0.5s,visibility 0.5s,transform 0.3s;backdrop-filter:blur(8px);
+        }
+        #music-control-btn:hover { transform:scale(1.08); }
+        #music-control-btn.visible { opacity:1;visibility:visible; }
+        #music-control-btn svg { width:20px;height:20px;fill:#fff; }
+
+        /* ====== PÉTALOS ====== */
+        .flower-petal { position:absolute;background-color:#ffd1dc;border-radius:150% 0 150% 0;pointer-events:none;animation:float-up infinite ease-in;opacity:0; }
+
+        /* ====== LOTUS + FOOTER ====== */
+        .lotus-header { margin-bottom:20px; }
+        .lotus-header svg { width:48px;height:48px;fill:#c2ada0; }
+        .invitation-footer { font-family:'Cinzel',serif;font-size:9px;letter-spacing:3px;color:rgba(115,96,99,0.5);margin-top:24px;font-weight:400;text-transform:uppercase; }
+
+        /* ====== KEYFRAMES ====== */
+        @keyframes pulse { 0%,100%{opacity:0.5}50%{opacity:1} }
+        @keyframes float-up { 0%{transform:translateY(0) translateX(0) rotate(0deg) scale(0.5);opacity:0}15%,85%{opacity:0.6}100%{transform:translateY(-100vh) translateX(50px) rotate(360deg) scale(1);opacity:0} }
+
+        @media(max-width:400px){
+            .main-title{font-size:64px}
+            .invitation-frame{padding:38px 22px}
+            .bloque-vidrio,.bloque-vidrio-alt{margin:0 -22px}
+        }
+    </style>
 </head>
-
 <body>
-
-<!-- ================= SOBRE ================= -->
-
-<div id="envelope-screen">
-
-<div class="envelope-wrapper" onclick="openEnvelope()">
-
-<div class="envelope-body">
-
-<div class="envelope-left"></div>
-<div class="envelope-right"></div>
-<div class="envelope-bottom"></div>
-<div class="envelope-flap"></div>
-
-</div>
-
-<div class="wax-seal">P</div>
-
-<div class="envelope-title">
-Paula García Calixto
-</div>
-
-<div class="envelope-sub">
-Toca el sello para abrir
-</div>
-
-</div>
-
-</div>
-
-<!-- ================= CONTENIDO ================= -->
-
-<main id="main-invitation">
-
-<div class="invitation-frame">
-
-<div class="section-tag">Mis XV Años</div>
-
-<h1 class="main-title">Paula</h1>
-
-<div class="full-name">García Calixto</div>
-
-<p class="phrase">
-"Hoy empieza una nueva etapa mágica en mi vida, llena de ilusiones y momentos que deseo conservar por siempre. Quiero compartir esta noche tan especial con las personas que más quiero."
-</p>
-
-<div class="divider"><span></span></div>
-
-<div class="info-block">
-
-<div class="info-label">
-Con la bendición de mis padres
-</div>
-
-<div class="family-names">
-Nancy Calixto García<br>
-Norberto García Hernández
-</div>
-
-</div>
-
-<div class="info-block">
-
-<div class="info-label">
-Mis Padrinos
-</div>
-
-<div class="family-names">
-Angel Humberto Calixto García<br>
-Yarisnay Rivera Espinosa
-</div>
-
-</div>
-
-<div class="divider"><span></span></div>
-
-<div class="section-heading-sm">
-Cuenta Regresiva
-</div>
-
-<div class="countdown-grid" id="countdown-timer">
-
-<div class="countdown-item">
-<span class="countdown-number" id="days">00</span>
-<span class="countdown-label">Días</span>
-</div>
-
-<div class="countdown-item">
-<span class="countdown-number" id="hours">00</span>
-<span class="countdown-label">Horas</span>
-</div>
-
-<div class="countdown-item">
-<span class="countdown-number" id="minutes">00</span>
-<span class="countdown-label">Min</span>
-</div>
-
-<div class="countdown-item">
-<span class="countdown-number" id="seconds">00</span>
-<span class="countdown-label">Seg</span>
-</div>
-
-</div>
-
-<div class="divider"><span></span></div>
-
-<!-- ================= FECHA ================= -->
-
-<div class="glass-block">
-
-<div class="section-heading">Fecha</div>
-
-<div style="text-align:center;font-family:'Cinzel',serif;font-size:30px;letter-spacing:3px;">
-05 · SEP · 2026
-</div>
-
-<div style="text-align:center;font-style:italic;font-size:18px;color:#7d6b70;margin-top:6px;">
-Sábado · 6:00 P.M.
-</div>
-
-<div class="calendar-modern">
-
-<div class="calendar-title">
-<div class="calendar-month">Septiembre</div>
-<div class="calendar-year">2026</div>
-</div>
-
-<div class="calendar-days">
-
-<div class="day-name">LUN</div>
-<div class="day-name">MAR</div>
-<div class="day-name">MIÉ</div>
-<div class="day-name">JUE</div>
-<div class="day-name">VIE</div>
-<div class="day-name">SÁB</div>
-<div class="day-name">DOM</div>
-
-<div></div>
-<div class="day">1</div>
-<div class="day">2</div>
-<div class="day">3</div>
-<div class="day">4</div>
-<div class="day highlight">5</div>
-<div class="day">6</div>
-
-<div class="day">7</div>
-<div class="day">8</div>
-<div class="day">9</div>
-<div class="day">10</div>
-<div class="day">11</div>
-<div class="day">12</div>
-<div class="day">13</div>
-
-<div class="day">14</div>
-<div class="day">15</div>
-<div class="day">16</div>
-<div class="day">17</div>
-<div class="day">18</div>
-<div class="day">19</div>
-<div class="day">20</div>
-
-<div class="day">21</div>
-<div class="day">22</div>
-<div class="day">23</div>
-<div class="day">24</div>
-<div class="day">25</div>
-<div class="day">26</div>
-<div class="day">27</div>
-
-</div>
-
-</div>
-
-<button class="btn-calendario" onclick="addToCalendar()">
-Agregar a mi Calendario
-</button>
-
-</div>
-
-<div class="divider"><span></span></div>
-
-<!-- ================= UBICACIONES ================= -->
-
-<div class="section-heading">Ubicaciones</div>
-
-<div style="text-align:center;font-size:18px;font-style:italic;color:#756267;margin-bottom:15px;">
-Azcapotzalco, Ciudad de México
-</div>
-
-<div class="map-card">
-
-<div class="map-card-header">
-<span class="map-card-tipo">Ceremonia</span>
-<span class="map-card-nombre">Capilla de Santa Teresita</span>
-</div>
-
-<div class="map-card-body">
-
-<div class="map-card-direccion">
-C. Santander 16, San Rafael, Azcapotzalco, 02010
-</div>
-
-<div class="map-wrapper">
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.5457049445194!2d-99.1765876!3d19.4751855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f9ce0691b059%3A0xc4eb0ea5fcefe662!2sColegio%20Santa%20Teresita!5e0!3m2!1ses-419!2smx!4v1716410000000!5m2!1ses-419!2smx"
-width="100%"
-height="100%"
-style="border:0;"
-allowfullscreen=""
-loading="lazy"></iframe>
-</div>
-
-</div>
-</div>
-
-<div class="map-card">
-
-<div class="map-card-header">
-<span class="map-card-tipo">Recepción</span>
-<span class="map-card-nombre">Salón Melody</span>
-</div>
-
-<div class="map-card-body">
-
-<div class="map-card-direccion">
-Av. Morelos 49C, San Andres, Azcapotzalco, 02240
-</div>
-
-<div class="map-wrapper">
-<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.4285741914175!2d-99.1863583!3d19.4802422!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f99be44983a5%3A0x7be9265f2a1ecf94!2sAv.%20Morelos%2049%2C%20San%20Andres%2C%20Azcapotzalco%2C%2002240%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses-419!2smx!4v1716410100000!5m2!1ses-419!2smx"
-width="100%"
-height="100%"
-style="border:0;"
-allowfullscreen=""
-loading="lazy"></iframe>
-</div>
-
-</div>
-</div>
-
-<div class="divider"><span></span></div>
-
-<!-- ================= ITINERARIO ================= -->
-
-<div class="glass-block">
-
-<div class="section-heading">Itinerario</div>
-
-<div class="timeline-modern">
-
-<!-- ITEM -->
-<div class="timeline-item">
-
-<div class="timeline-heart">
-<svg viewBox="0 0 24 24">
-<path d="M12 21s-7-4.35-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.65-7 10-7 10z"/>
-</svg>
-</div>
-
-<div class="timeline-time">6:00 P.M.</div>
-<div class="timeline-event">Misa</div>
-
-</div>
-
-<!-- ITEM -->
-<div class="timeline-item">
-
-<div class="timeline-heart">
-<svg viewBox="0 0 24 24">
-<path d="M12 21s-7-4.35-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.65-7 10-7 10z"/>
-</svg>
-</div>
-
-<div class="timeline-time">8:30 P.M.</div>
-<div class="timeline-event">Entrada al Salón</div>
-
-</div>
-
-<!-- ITEM -->
-<div class="timeline-item">
-
-<div class="timeline-heart">
-<svg viewBox="0 0 24 24">
-<path d="M12 21s-7-4.35-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.65-7 10-7 10z"/>
-</svg>
-</div>
-
-<div class="timeline-time">9:00 P.M.</div>
-<div class="timeline-event">Cena</div>
-
-</div>
-
-<!-- ITEM -->
-<div class="timeline-item">
-
-<div class="timeline-heart">
-<svg viewBox="0 0 24 24">
-<path d="M12 21s-7-4.35-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.65-7 10-7 10z"/>
-</svg>
-</div>
-
-<div class="timeline-time">10:00 P.M.</div>
-<div class="timeline-event">Vals</div>
-
-</div>
-
-<!-- ITEM -->
-<div class="timeline-item">
-
-<div class="timeline-heart">
-<svg viewBox="0 0 24 24">
-<path d="M12 21s-7-4.35-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.65-7 10-7 10z"/>
-</svg>
-</div>
-
-<div class="timeline-time">11:00 P.M.</div>
-<div class="timeline-event">Pastel</div>
-
-</div>
-
-<!-- ITEM -->
-<div class="timeline-item">
-
-<div class="timeline-heart">
-<svg viewBox="0 0 24 24">
-<path d="M12 21s-7-4.35-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.65-7 10-7 10z"/>
-</svg>
-</div>
-
-<div class="timeline-time">11:20 P.M.</div>
-<div class="timeline-event">Baile</div>
-
-</div>
-
-<!-- ITEM -->
-<div class="timeline-item" style="margin-bottom:0;">
-
-<div class="timeline-heart">
-<svg viewBox="0 0 24 24">
-<path d="M12 21s-7-4.35-7-10a4 4 0 0 1 7-2 4 4 0 0 1 7 2c0 5.65-7 10-7 10z"/>
-</svg>
-</div>
-
-<div class="timeline-time">2:00 A.M.</div>
-<div class="timeline-event">Fin del Evento</div>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="divider"><span></span></div>
-
-<!-- ================= RSVP ================= -->
-
-<div class="glass-block">
-
-<div class="section-heading">
-Confirmación
-</div>
-
-<p class="rsvp-intro">
-Será un honor contar con tu presencia en esta noche tan especial. Por favor confirma tu asistencia.
-</p>
-
-<div class="rsvp-input-wrap">
-
-<label class="rsvp-input-label">
-Nombre Completo
-</label>
-
-<input
-type="text"
-id="guest-name"
-class="rsvp-input"
-placeholder="Escribe tu nombre aquí..."
->
-
-</div>
-
-<button onclick="sendConfirmationViaWhatsApp()" class="btn-confirmar">
-Confirmar por WhatsApp
-</button>
-
-</div>
-
-<div class="invitation-footer">
-Invytia Preview Data
-</div>
-
-</div>
-
-</main>
-
-<script>
-
-/* ================= SOBRE ================= */
-
-function openEnvelope(){
-
-const wrapper = document.querySelector('.envelope-wrapper');
-const screen = document.getElementById('envelope-screen');
-
-wrapper.classList.add('open');
-
-setTimeout(()=>{
-
-screen.classList.add('fade-out');
-document.body.classList.add('content-active');
-
-},1000);
-
-}
-
-/* ================= COUNTDOWN ================= */
-
-const target = new Date("September 5, 2026 00:00:00").getTime();
-
-setInterval(()=>{
-
-const now = new Date().getTime();
-const distance = target - now;
-
-const d = Math.floor(distance / (1000 * 60 * 60 * 24));
-const h = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-const m = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-const s = Math.floor((distance % (1000 * 60)) / 1000);
-
-document.getElementById("days").innerText = d;
-document.getElementById("hours").innerText = h;
-document.getElementById("minutes").innerText = m;
-document.getElementById("seconds").innerText = s;
-
-},1000);
-
-/* ================= WHATSAPP ================= */
-
-function sendConfirmationViaWhatsApp(){
-
-const inp = document.getElementById('guest-name');
-
-if(!inp.value.trim()){
-
-alert('Por favor escribe tu nombre.');
-return;
-
-}
-
-const msg =
-`¡Hola! Confirmo mi asistencia a los XV Años de Paula García Calixto.
-
-Nombre: ${inp.value}`;
-
-window.open(
-`https://wa.me/525583815508?text=${encodeURIComponent(msg)}`,
-'_blank'
-);
-
-}
-
-/* ================= CALENDAR ================= */
-
-function addToCalendar(){
-
-const ics = [
-'BEGIN:VCALENDAR',
-'VERSION:2.0',
-'BEGIN:VEVENT',
-'DTSTART:20260905T180000',
-'DTEND:20260906T020000',
-'SUMMARY:XV Años de Paula García Calixto',
-'DESCRIPTION:XV Años Paula',
-'END:VEVENT',
-'END:VCALENDAR'
-].join('\n');
-
-const blob = new Blob([ics], { type: 'text/calendar' });
-
-const link = document.createElement('a');
-
-link.href = URL.createObjectURL(blob);
-link.download = 'xv-paula.ics';
-
-document.body.appendChild(link);
-
-link.click();
-
-document.body.removeChild(link);
-
-}
-
-</script>
-
-</body>
-</html>
+    <audio id="song" src="assets/song.mp3" loop preload="auto"></audio>
+    <canvas id="glitter-canvas"></canvas>
+    <button id="music-control-btn" onclick="toggleMusic()" aria-label="Control de música">
+        <svg id="music-icon" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+    </button>
+
+    <div id="envelope-screen">
+        <div class="envelope-wrapper">
+            <div class="envelope-body">
+                <div class="envelope-left-fold"></div>
+                <div class="envelope-right-fold"></div>
+                <div class="envelope-bottom-fold"></div>
+                <div class="envelope-flap"></div>
+            </div>
+            <div class="wax-seal">
+                <div class="wax-seal-inner">
+                    <span class="wax-seal-letter">P</span>
+                    <span class="wax-seal-subtitle">XV AÑOS</span>
+                </div>
+            </div>
+            <div class="envelope-text">Paula García Calixto</div>
+            <div class="hint-text">Toca el sello para abrir</div>
+        </div>
+    </div>
+
+    <main id="main-invitation">
+        <div id="lanterns-container" style="position:absolute;top:0;left:0;width:100%;height:100%;overflow:hidden;pointer-events:none;z-index:1;"></div>
+
+        <div class="invitation-frame" style="z-index:2;">
+
+            <!-- Destellos en esquinas del frame -->
+            <div class="frame-sparkle">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2 L13.2 10.8 L22 12 L13.2 13.2 L12 22 L10.8 13.2 L2 12 L10.8 10.8 Z" fill="#f4a7b9" opacity="0.9"/>
+                    <path d="M12 6 L12.7 11.3 L18 12 L12.7 12.7 L12 18 L11.3 12.7 L6 12 L11.3 11.3 Z" fill="white" opacity="0.7"/>
+                </svg>
+            </div>
+            <div class="frame-sparkle">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2 L13.2 10.8 L22 12 L13.2 13.2 L12 22 L10.8 13.2 L2 12 L10.8 10.8 Z" fill="#f4a7b9" opacity="0.85"/>
+                    <path d="M12 6 L12.7 11.3 L18 12 L12.7 12.7 L12 18 L11.3 12.7 L6 12 L11.3 11.3 Z" fill="white" opacity="0.65"/>
+                </svg>
+            </div>
+            <div class="frame-sparkle">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2 L13.2 10.8 L22 12 L13.2 13.2 L12 22 L10.8 13.2 L2 12 L10.8 10.8 Z" fill="#f4a7b9" opacity="0.8"/>
+                    <path d="M12 6 L12.7 11.3 L18 12 L12.7 12.7 L12 18 L11.3 12.7 L6 12 L11.3 11.3 Z" fill="white" opacity="0.6"/>
+                </svg>
+            </div>
+            <div class="frame-sparkle">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2 L13.2 10.8 L22 12 L13.2 13.2 L12 22 L10.8 13.2 L2 12 L10.8 10.8 Z" fill="#f4a7b9" opacity="0.9"/>
+                    <path d="M12 6 L12.7 11.3 L18 12 L12.7 12.7 L12 18 L11.3 12.7 L6 12 L11.3 11.3 Z" fill="white" opacity="0.7"/>
+                </svg>
+            </div>
+            <div class="frame-sparkle">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2 L13.2 10.8 L22 12 L13.2 13.2 L12 22 L10.8 13.2 L2 12 L10.8 10.8 Z" fill="#f9c8d4" opacity="0.75"/>
+                </svg>
+            </div>
+            <div class="frame-sparkle">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                    <path d="M12 2 L13.2 10.8 L22 12 L13.2 13.2 L12 22 L10.8 13.2 L2 12 L10.8 10.8 Z" fill="#f9c8d4" opacity="0.75"/>
+                </svg>
+            </div>
+
+            <div class="lotus-header">
+                <svg viewBox="0 0 24 24"><path d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.55 18.55 20 18 20H6C5.45 20 5 19.55 5 19V18H19V19Z"/></svg>
+            </div>
+
+            <div class="section-tag">Mis XV Años</div>
+            <h1 class="main-title">Paula</h1>
+            <div class="full-name">García Calixto</div>
+
+            <p class="phrase">"Hoy empieza una nueva etapa mágica en mi vida, llena de ilusiones y momentos que deseo conservar por siempre. Quiero compartir esta noche tan especial con las personas que más quiero."</p>
+
+            <div class="divider-ornate"><div class="divider-ornate-diamond"></div></div>
+
+            <div class="info-block">
+                <div class="info-label">Con la bendición de mis padres</div>
+                <div class="family-names">Nancy Calixto García<br>Norberto García Hernández</div>
+            </div>
+            <div class="info-block">
+                <div class="info-label">Mis Padrinos</div>
+                <div class="family-names">Angel Humberto Calixto García<br>Yarisnay Rivera Espinosa</div>
+            </div>
+
+            <div class="divider-ornate"><div class="divider-ornate-diamond"></div></div>
+
+            <div class="section-heading-sm">Cuenta Regresiva</div>
+            <div class="countdown-grid" id="countdown-timer">
+                <div class="countdown-item"><span class="countdown-number" id="days">00</span><span class="countdown-label">Días</span></div>
+                <div class="countdown-item"><span class="countdown-number" id="hours">00</span><span class="countdown-label">Hrs</span></div>
+                <div class="countdown-item"><span class="countdown-number" id="minutes">00</span><span class="countdown-label">Min</span></div>
+                <div class="countdown-item"><span class="countdown-number" id="seconds">00</span><span class="countdown-label">Seg</span></div>
+            </div>
+
+            <div class="divider-ornate"><div class="divider-ornate-diamond"></div></div>
+
+            <!-- FECHA -->
+            <div class="bloque-vidrio">
+                <div class="section-heading">Fecha</div>
+                <div style="font-family:'Cinzel',serif;font-size:28px;font-weight:300;color:var(--text-deep);letter-spacing:3px;">05 · SEP · 2026</div>
+                <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:16px;color:#7a3a47;margin-top:5px;">Sábado &nbsp;·&nbsp; Horario por definir</div>
+                <div class="calendar-widget">
+                    <div class="calendar-header">2026 <div class="calendar-month">Septiembre</div></div>
+                    <div class="calendar-body">
+                        <div class="calendar-days-header">
+                            <span class="calendar-day-name">Dom</span><span class="calendar-day-name">Lun</span><span class="calendar-day-name">Mar</span><span class="calendar-day-name">Mié</span><span class="calendar-day-name">Jue</span><span class="calendar-day-name">Vie</span><span class="calendar-day-name">Sáb</span>
+                        </div>
+                        <div class="calendar-grid">
+                            <span class="cal-day empty"></span><span class="cal-day empty"></span>
+                            <span class="cal-day">1</span><span class="cal-day">2</span><span class="cal-day">3</span><span class="cal-day">4</span><span class="cal-day highlight">5</span>
+                            <span class="cal-day">6</span><span class="cal-day">7</span><span class="cal-day">8</span><span class="cal-day">9</span><span class="cal-day">10</span><span class="cal-day">11</span><span class="cal-day">12</span>
+                            <span class="cal-day">13</span><span class="cal-day">14</span><span class="cal-day">15</span><span class="cal-day">16</span><span class="cal-day">17</span><span class="cal-day">18</span><span class="cal-day">19</span>
+                            <span class="cal-day">20</span><span class="cal-day">21</span><span class="cal-day">22</span><span class="cal-day">23</span><span class="cal-day">24</span><span class="cal-day">25</span><span class="cal-day">26</span>
+                            <span class="cal-day">27</span><span class="cal-day">28</span><span class="cal-day">29</span><span class="cal-day">30</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn-calendario" onclick="addToCalendar()">
+                    <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5C3.89 3 3 3.9 3 5v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 16H5V9h14v10zm0-12H5V5h14v2zM7 11h5v5H7z"/></svg>
+                    Agregar a mi Calendario
+                </button>
+            </div>
+
+            <div class="divider-ornate"><div class="divider-ornate-diamond"></div></div>
+
+            <!-- UBICACIONES -->
+            <div class="info-block">
+                <div class="section-heading">Ubicaciones</div>
+                <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:17px;color:var(--text-muted);margin-bottom:4px;">Azcapotzalco, Ciudad de México</div>
+                <div class="map-card" style="margin-bottom:14px;">
+                    <div class="map-card-header">
+                        <span class="map-card-tipo">Ceremonia</span>
+                        <span class="map-card-nombre">Capilla de Santa Teresita</span>
+                    </div>
+                    <div class="map-card-body">
+                        <div class="map-card-direccion">C. Santander 16, San Rafael, Azcapotzalco, 02010</div>
+                        <div class="map-wrapper">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.5457049445194!2d-99.1765876!3d19.4751855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f9ce0691b059%3A0xc4eb0ea5fcefe662!2sColegio%20Santa%20Teresita!5e0!3m2!1ses-419!2smx!4v1716410000000!5m2!1ses-419!2smx" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                        </div>
+                    </div>
+                </div>
+                <div class="map-card">
+                    <div class="map-card-header">
+                        <span class="map-card-tipo">Recepción</span>
+                        <span class="map-card-nombre">Salón Melody</span>
+                    </div>
+                    <div class="map-card-body">
+                        <div class="map-card-direccion">Av. Morelos 49C, San Andres, Azcapotzalco, 02240</div>
+    
