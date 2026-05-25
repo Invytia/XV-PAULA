@@ -17,22 +17,20 @@
         :root {
 
             /* Paleta Rosa Pastel Optimizada para Mayor Contraste */
-
             --bg-dark: #fff5f7; 
-
             --bg-bayou: linear-gradient(135deg, #ffe4e8 0%, #fcd5ce 100%); 
-
-            --gold-primary: #c2ada0; /* Oscurecido ligeramente para mejor lectura de etiquetas */
-
+            --gold-primary: #c2ada0;
             --gold-secondary: #e3d5ca; 
-
-            --text-light: #3a2b2f; /* Más oscuro para contraste óptimo */
-
-            --text-muted: #736063; /* Más oscuro para subetiquetas legibles */
-
+            --text-light: #3a2b2f;
+            --text-muted: #736063;
             --magic-glow: rgba(255, 228, 232, 0.6);
 
-            
+            /* Colores rosa para bloques sólidos */
+            --rosa-solido: #f2c4cc;
+            --rosa-solido-oscuro: #e8aab5;
+            --rosa-degradado-start: #fce4e8;
+            --rosa-degradado-end: #f5c9d3;
+
             /* Colores crema para el sobre */
             --cream-base: #fdf6ee;
             --cream-mid: #f5e6d3;
@@ -41,365 +39,215 @@
             --cream-accent: #c9a87c;
         }
 
-
-
         * {
-
             box-sizing: border-box;
-
             margin: 0;
-
             padding: 0;
-
         }
-
-
 
         body, html {
-
             width: 100%;
-
             height: 100%;
-
             font-family: 'Montserrat', sans-serif;
-
             background-color: var(--bg-dark);
-
             color: var(--text-light);
-
             overflow-x: hidden;
-
         }
-
-
 
         /* ========================================
            PANTALLA DEL SOBRE - FONDO CON imagen.jpg
         ======================================== */
 
         #envelope-screen {
-
             position: fixed;
-
             top: 0;
-
             left: 0;
-
             width: 100%;
-
             height: 100%;
-
             background-image: url('assets/imagen.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-
             z-index: 1000;
-
             display: flex;
-
             justify-content: center;
-
             align-items: center;
-
             transition: opacity 1.2s ease-in-out, visibility 1.2s;
-
             overflow: hidden;
-
         }
 
         /* Capa de color suave encima de la foto */
         #envelope-screen::before {
-
             content: '';
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
             background: linear-gradient(160deg, rgba(255, 240, 245, 0.55) 0%, rgba(245, 215, 225, 0.55) 100%);
             z-index: 0;
-
         }
 
         #envelope-screen.fade-out {
-
             opacity: 0;
-
             visibility: hidden;
-
             pointer-events: none;
-
         }
-
 
         /* ========================================
            SOBRE PREMIUM REALISTA
         ======================================== */
 
         .envelope-wrapper {
-
             position: relative;
-
             cursor: pointer;
-
             z-index: 1;
-
             display: flex;
-
             flex-direction: column;
-
             align-items: center;
-
-            /* Perspectiva para la animación de apertura de solapa */
             perspective: 800px;
-
         }
 
         .envelope-wrapper:hover .envelope-body {
-
             transform: translateY(-4px);
-
         }
 
         /* Cuerpo principal del sobre */
         .envelope-body {
-
             position: relative;
-
             width: 320px;
-
             height: 220px;
-
             background: linear-gradient(160deg, #ffffff 0%, #f9f4f0 100%);
-
             border-radius: 4px 4px 6px 6px;
-
             box-shadow:
                 0 25px 60px rgba(100, 60, 80, 0.22),
                 0 8px 20px rgba(100, 60, 80, 0.12),
                 0 2px 6px rgba(100, 60, 80, 0.08),
                 inset 0 1px 0 rgba(255,255,255,1);
-
             border: 1px solid rgba(210, 185, 190, 0.5);
-
             transition: transform 0.4s ease, box-shadow 0.4s ease;
-
             overflow: visible;
-
         }
 
         .envelope-wrapper:hover .envelope-body {
-
             box-shadow:
                 0 35px 80px rgba(100, 60, 80, 0.28),
                 0 12px 30px rgba(100, 60, 80, 0.15),
                 0 3px 8px rgba(100, 60, 80, 0.1),
                 inset 0 1px 0 rgba(255,255,255,1);
-
         }
 
         /* Triángulos laterales internos (pliegues del sobre) */
         .envelope-left-fold {
-
             position: absolute;
-
             bottom: 0; left: 0;
-
             width: 0; height: 0;
-
             border-left: 160px solid rgba(220, 195, 200, 0.35);
-
             border-top: 110px solid transparent;
-
             border-bottom: 110px solid rgba(220, 195, 200, 0.35);
-
             border-radius: 0 0 0 6px;
-
             z-index: 1;
-
         }
 
         .envelope-right-fold {
-
             position: absolute;
-
             bottom: 0; right: 0;
-
             width: 0; height: 0;
-
             border-right: 160px solid rgba(200, 175, 180, 0.3);
-
             border-top: 110px solid transparent;
-
             border-bottom: 110px solid rgba(200, 175, 180, 0.3);
-
             border-radius: 0 0 6px 0;
-
             z-index: 1;
-
         }
 
         /* Triángulo inferior (solapa de cierre) */
         .envelope-bottom-fold {
-
             position: absolute;
-
             bottom: 0; left: 0;
-
             width: 0; height: 0;
-
             border-left: 160px solid transparent;
-
             border-right: 160px solid transparent;
-
             border-bottom: 115px solid rgba(240, 225, 228, 0.5);
-
             border-radius: 0 0 6px 6px;
-
             z-index: 2;
-
         }
 
         /* ---- SOLAPA SUPERIOR (se abre hacia arriba) ---- */
         .envelope-flap {
-
             position: absolute;
-
             top: 0; left: -1px;
-
             width: 322px;
-
             height: 0;
-
-            /* Triángulo apuntando hacia abajo = solapa */
             border-left: 161px solid transparent;
-
             border-right: 161px solid transparent;
-
             border-top: 118px solid #f5edf0;
-
             transform-origin: top center;
-
             transform-style: preserve-3d;
-
             transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1) 0.1s;
-
             z-index: 4;
-
             filter: drop-shadow(0 3px 6px rgba(100,60,80,0.12));
-
         }
 
-        /* Sombra sutil en la solapa para darle profundidad */
         .envelope-flap::before {
-
             content: '';
-
             position: absolute;
-
             top: -118px; left: -161px;
-
             width: 322px;
-
             height: 118px;
-
             background: linear-gradient(180deg, rgba(210,180,190,0.15) 0%, transparent 60%);
-
             pointer-events: none;
-
         }
 
-        /* Línea de pliegue de la solapa */
         .envelope-flap::after {
-
             content: '';
-
             position: absolute;
-
             top: -118px; left: -156px;
-
             width: 312px;
-
             height: 1px;
-
-            /* La línea está en el punto más bajo del triángulo */
             top: -2px;
-
             background: linear-gradient(to right, transparent, rgba(180,140,155,0.4), transparent);
-
         }
 
         .envelope-wrapper.open .envelope-flap {
-
             transform: rotateX(-175deg);
-
             z-index: 1;
-
         }
-
 
         /* ========================================
            SELLO DE CERA ROSA PREMIUM
         ======================================== */
 
         .wax-seal {
-
             position: absolute;
-
-            /* Centrado sobre el borde entre solapa y cuerpo */
             top: 68px;
-
             left: 50%;
-
             transform: translateX(-50%);
-
             width: 58px;
-
             height: 58px;
-
             border-radius: 50%;
-
             z-index: 6;
-
             display: flex;
-
             justify-content: center;
-
             align-items: center;
-
             transition: transform 0.45s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.35s ease 0.3s;
-
-            /* Textura de cera con múltiples capas */
             background:
                 radial-gradient(circle at 38% 32%, rgba(255,200,210,0.7) 0%, transparent 45%),
                 radial-gradient(ellipse at 60% 70%, rgba(140,60,80,0.25) 0%, transparent 50%),
                 radial-gradient(circle, #d4768a 0%, #c0566e 35%, #a83d58 60%, #8f2a44 100%);
-
             box-shadow:
                 0 6px 20px rgba(140, 50, 80, 0.35),
                 0 2px 8px rgba(140, 50, 80, 0.2),
                 inset 0 3px 8px rgba(255, 180, 200, 0.4),
                 inset 0 -3px 8px rgba(80, 20, 40, 0.3);
-
         }
 
-        /* Borde irregular de cera (efecto goteo) */
         .wax-seal::before {
-
             content: '';
-
             position: absolute;
-
             top: -4px; left: -4px;
-
             right: -4px; bottom: -4px;
-
             border-radius: 50%;
-
             background:
                 radial-gradient(circle at 38% 32%, rgba(255,200,210,0.4) 0%, transparent 40%),
                 radial-gradient(circle, #c0566e 0%, #a83d58 50%, #8f2a44 100%);
-
-            /* Forma irregular de cera con clip-path */
             clip-path: polygon(
                 50% 0%, 58% 3%, 65% 1%, 72% 5%, 79% 3%,
                 85% 8%, 92% 8%, 97% 14%, 100% 20%,
@@ -414,597 +262,312 @@
                 7% 13%, 12% 8%, 19% 5%, 26% 3%,
                 33% 5%, 40% 2%, 47% 0%
             );
-
             z-index: -1;
-
             opacity: 0.6;
-
         }
 
-        /* Letra / icono dentro del sello */
         .wax-seal-inner {
-
             display: flex;
-
             flex-direction: column;
-
             align-items: center;
-
             justify-content: center;
-
             gap: 1px;
-
         }
 
         .wax-seal-letter {
-
             font-family: 'Pinyon Script', cursive;
-
             font-size: 24px;
-
             color: rgba(255, 240, 245, 0.95);
-
             line-height: 1;
-
             text-shadow: 0 1px 3px rgba(80, 20, 40, 0.4);
-
         }
 
         .wax-seal-subtitle {
-
             font-family: 'Cinzel', serif;
-
             font-size: 5.5px;
-
             color: rgba(255, 235, 240, 0.85);
-
             letter-spacing: 1.5px;
-
             text-transform: uppercase;
-
             font-weight: 600;
-
         }
 
-        /* Texto curvo alrededor del sello */
         .wax-seal-text-svg {
-
             position: absolute;
-
             top: 50%; left: 50%;
-
             transform: translate(-50%, -50%);
-
             width: 150px;
-
             height: 150px;
-
             z-index: 7;
-
             pointer-events: none;
-
         }
 
         .wax-seal-text-svg textPath {
-
             font-family: 'Cinzel', serif;
-
             font-size: 8.5px;
-
             letter-spacing: 3px;
-
             fill: #8f2a44;
-
             font-weight: 600;
-
         }
 
-
         .envelope-wrapper.open .wax-seal {
-
             transform: translateX(-50%) scale(0) rotate(20deg);
-
             opacity: 0;
-
         }
 
         .envelope-wrapper.open svg[viewBox="0 0 160 160"] {
-
             opacity: 0;
-
             transition: opacity 0.3s ease;
-
         }
 
         /* Texto debajo del sobre */
         .envelope-text {
-
             margin-top: 30px;
-
             text-align: center;
-
             font-family: 'Cinzel', serif;
-
             font-size: 13px;
-
             color: #5a2d3e;
-
             letter-spacing: 3px;
-
             text-transform: uppercase;
-
             text-shadow: 0 1px 4px rgba(255,255,255,0.7);
-
             font-weight: 600;
-
         }
 
         .hint-text {
-
             margin-top: 10px;
-
             text-align: center;
-
             font-family: 'Montserrat', sans-serif;
-
             font-size: 11px;
-
             color: #7a4050;
-
             letter-spacing: 1px;
-
             opacity: 0.8;
-
             animation: pulse 2s infinite;
-
         }
-
-
 
         /* Contenido de la Invitación Principal */
-
         #main-invitation {
-
             min-height: 100vh;
-
             background: url('assets/imagen.jpg') no-repeat center center;
-
             background-size: cover;
-
             background-attachment: fixed;
-
             position: relative;
-
             display: flex;
-
             flex-direction: column;
-
             align-items: center;
-
             padding: 60px 20px;
-
             opacity: 0;
-
             transform: translateY(20px);
-
             transition: opacity 1.5s ease-out 0.6s, transform 1.5s ease-out 0.6s;
-
         }
-
-
 
         body.content-active #main-invitation {
-
             opacity: 1;
-
             transform: translateY(0);
-
         }
-
-
 
         .invitation-frame {
-
             max-width: 500px;
-
             width: 100%;
-
             border: 1px solid var(--gold-secondary);
-
             padding: 45px 30px;
-
             text-align: center;
-
             position: relative;
-
             background: rgba(255, 253, 254, 0.88); 
-
             box-shadow: 0 15px 35px rgba(89, 74, 78, 0.15);
-
             backdrop-filter: blur(8px);
-
             -webkit-backdrop-filter: blur(8px);
-
             border-radius: 4px;
-
         }
-
-
 
         /* Elementos Decorativos */
-
         .lotus-header {
-
             margin-bottom: 20px;
-
         }
-
-
 
         .lotus-header svg {
-
             width: 60px;
-
             height: 60px;
-
             fill: var(--gold-primary);
-
         }
-
-
 
         /* Tipografía Avanzada */
-
         .section-tag {
-
             font-family: 'Cinzel', serif;
-
             font-size: 12px;
-
             letter-spacing: 5px;
-
             color: var(--text-muted);
-
             text-transform: uppercase;
-
             margin-bottom: 12px;
-
             font-weight: 600;
-
         }
-
-
 
         .main-title {
-
             font-family: 'Pinyon Script', cursive;
-
             font-size: 70px;
-
             color: var(--text-light);
-
             margin-bottom: 5px;
-
             text-shadow: 0 1px 3px rgba(255, 255, 255, 0.8);
-
             line-height: 1.1;
-
         }
-
-
 
         .full-name {
-
             font-family: 'Cinzel', serif;
-
             font-size: 13px;
-
             letter-spacing: 3px;
-
             color: var(--text-light);
-
             margin-bottom: 25px;
-
             font-weight: 600;
-
         }
-
-
 
         .phrase {
-
             font-family: 'Cormorant Garamond', serif;
-
             font-style: italic;
-
             font-size: 19px;
-
             color: var(--text-light);
-
             line-height: 1.6;
-
             margin-bottom: 35px;
-
             padding: 0 10px;
-
         }
-
-
 
         .divider {
-
             width: 70px;
-
             height: 1px;
-
             background: linear-gradient(to right, transparent, var(--gold-primary), transparent);
-
             margin: 25px auto;
-
         }
-
-
 
         /* Bloques de Información */
-
         .info-grid {
-
             margin-top: 30px;
-
         }
-
-
 
         .info-block {
-
             margin-bottom: 30px;
-
         }
-
-
 
         .info-label {
-
             font-family: 'Cinzel', serif;
-
             font-size: 12px;
-
             letter-spacing: 3px;
-
             color: var(--text-muted);
-
             text-transform: uppercase;
-
             margin-bottom: 10px;
-
             font-weight: 600;
-
         }
-
-
 
         .info-value-main {
-
             font-family: 'Cinzel', serif;
-
             font-size: 25px;
-
             font-weight: 600;
-
             color: var(--text-light);
-
             letter-spacing: 2px;
-
         }
-
-
 
         .info-value-sub {
-
             font-family: 'Montserrat', sans-serif;
-
             font-size: 15px;
-
             font-weight: 500;
-
             color: var(--text-light);
-
             margin-top: 6px;
-
             letter-spacing: 1px;
-
         }
-
-
 
         .family-names {
-
             font-family: 'Cormorant Garamond', serif;
-
             font-size: 21px;
-
             font-weight: 600;
-
             color: var(--text-light);
-
             line-height: 1.5;
-
             margin-top: 5px;
-
         }
-
-
 
         /* Estilos de Formulario de Confirmación */
-
         .rsvp-form {
-
             margin-top: 25px;
-
             text-align: left;
-
             width: 100%;
-
         }
-
-
 
         .form-group {
-
             margin-bottom: 18px;
-
         }
-
-
 
         .form-label {
-
             display: block;
-
             font-family: 'Montserrat', sans-serif;
-
             font-size: 12px;
-
             font-weight: 600;
-
             text-transform: uppercase;
-
             letter-spacing: 1px;
-
             color: var(--text-muted);
-
             margin-bottom: 6px;
-
         }
-
-
 
         .form-input, .form-select {
-
             width: 100%;
-
             padding: 12px;
-
             font-family: 'Montserrat', sans-serif;
-
             font-size: 14px;
-
             color: var(--text-light);
-
             background-color: rgba(255, 255, 255, 0.9);
-
             border: 1px solid var(--gold-secondary);
-
             border-radius: 4px;
-
             outline: none;
-
             transition: border-color 0.3s ease;
-
         }
-
-
 
         .form-input:focus, .form-select:focus {
-
             border-color: var(--gold-primary);
-
         }
-
-
 
         /* Estilos de la Cuenta Atrás */
-
         .countdown-grid {
-
             display: flex;
-
             justify-content: center;
-
             gap: 15px;
-
             margin: 25px auto 10px auto;
-
             max-width: 350px;
-
         }
-
-
 
         .countdown-item {
-
             flex: 1;
-
             background: rgba(255, 255, 255, 0.8);
-
             border: 1px solid rgba(213, 189, 175, 0.4);
-
             padding: 10px 5px;
-
             border-radius: 4px;
-
         }
-
-
 
         .countdown-number {
-
             font-family: 'Cinzel', serif;
-
             font-size: 22px;
-
             font-weight: 700;
-
             color: var(--text-light);
-
             display: block;
-
         }
-
-
 
         .countdown-label {
-
             font-size: 10px;
-
             text-transform: uppercase;
-
             letter-spacing: 1px;
-
             color: var(--text-muted);
-
             font-weight: 600;
-
         }
-
-
 
         /* ========================================
            FICHAS DE UBICACIÓN CON FOTO DE FONDO
         ======================================== */
 
         .map-card {
-
             margin-top: 15px;
-
             border: 1px solid rgba(213, 189, 175, 0.5);
-
             background: rgba(255, 255, 255, 0.85);
-
             padding: 16px;
-
             border-radius: 6px;
-
             text-align: left;
-            
             position: relative;
             overflow: hidden;
-
         }
 
-        /* Foto de fondo de la ficha con overlay */
         .map-card::before {
-
             content: '';
             position: absolute;
             top: 0; left: 0;
@@ -1012,283 +575,363 @@
             background-size: cover;
             background-position: center;
             border-radius: 6px;
-            opacity: 0.45; /* más visible */
+            opacity: 0.45;
             z-index: 0;
             pointer-events: none;
-
         }
 
         .map-card-ceremonia::before {
-
             background-image: url('assets/ceremonia.jpg');
-
         }
 
         .map-card-salon::before {
-
             background-image: url('assets/salon.jpg');
-
         }
 
-        /* Aseguramos que el contenido esté encima del fondo */
         .map-card > * {
-
             position: relative;
             z-index: 1;
-
         }
-
-
 
         .map-wrapper {
-
             width: 100%;
-
             height: 180px;
-
             margin-top: 12px;
-
             border-radius: 4px;
-
             overflow: hidden;
-
             border: 1px solid rgba(213, 189, 175, 0.3);
-
             position: relative;
             z-index: 1;
-
         }
 
+        /* ========================================
+           BLOQUE SÓLIDO ROSA - contenedor reutilizable
+        ======================================== */
 
+        .bloque-rosa-solido {
+            background-color: var(--rosa-solido);
+            border-radius: 6px;
+            padding: 28px 24px;
+            margin: 0 -30px;
+            position: relative;
+        }
+
+        .bloque-rosa-degradado {
+            background: linear-gradient(135deg, var(--rosa-degradado-start) 0%, var(--rosa-degradado-end) 100%);
+            border-radius: 6px;
+            padding: 28px 24px;
+            margin: 0 -30px;
+            position: relative;
+        }
+
+        /* Para que los labels y valores dentro de bloques rosa se vean bien */
+        .bloque-rosa-solido .info-label,
+        .bloque-rosa-degradado .info-label,
+        .bloque-rosa-solido .section-tag,
+        .bloque-rosa-degradado .section-tag {
+            color: #7a3a47;
+        }
+
+        .bloque-rosa-solido .divider,
+        .bloque-rosa-degradado .divider {
+            background: linear-gradient(to right, transparent, rgba(122,58,71,0.4), transparent);
+        }
+
+        /* ========================================
+           ITINERARIO
+        ======================================== */
+
+        .itinerario-list {
+            list-style: none;
+            margin-top: 18px;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .itinerario-item {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 13px 0;
+            border-bottom: 1px solid rgba(122, 58, 71, 0.15);
+            /* Estado inicial: fuera de vista a la derecha */
+            opacity: 0;
+            transform: translateX(60px);
+            transition: opacity 0.55s ease, transform 0.55s ease;
+        }
+
+        .itinerario-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .itinerario-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Línea decorativa vertical entre hora y evento */
+        .itinerario-sep {
+            width: 1px;
+            height: 28px;
+            background: rgba(122, 58, 71, 0.3);
+            flex-shrink: 0;
+        }
+
+        .itinerario-hora {
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+            font-weight: 700;
+            color: #7a3a47;
+            letter-spacing: 1px;
+            min-width: 78px;
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        .itinerario-evento {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 19px;
+            font-weight: 600;
+            color: var(--text-light);
+            text-align: left;
+        }
+
+        /* ========================================
+           CALENDARIO VISUAL
+        ======================================== */
+
+        .calendar-widget {
+            margin-top: 18px;
+            background: rgba(255,255,255,0.7);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(122,58,71,0.12);
+        }
+
+        .calendar-header {
+            background: #a83d58;
+            color: #fff;
+            font-family: 'Cinzel', serif;
+            font-size: 12px;
+            letter-spacing: 3px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .calendar-month {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 13px;
+            font-style: italic;
+            font-weight: 400;
+            letter-spacing: 1px;
+            opacity: 0.85;
+            margin-top: 2px;
+        }
+
+        .calendar-body {
+            padding: 14px 10px 16px;
+        }
+
+        .calendar-days-header {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            margin-bottom: 6px;
+        }
+
+        .calendar-day-name {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 9px;
+            font-weight: 700;
+            color: #a83d58;
+            letter-spacing: 0.5px;
+            text-align: center;
+            text-transform: uppercase;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+        }
+
+        .cal-day {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 12px;
+            font-weight: 500;
+            color: #3a2b2f;
+            text-align: center;
+            padding: 5px 2px;
+            border-radius: 4px;
+            line-height: 1;
+        }
+
+        .cal-day.empty {
+            color: transparent;
+        }
+
+        .cal-day.highlight {
+            background: #a83d58;
+            color: #fff;
+            font-weight: 700;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            box-shadow: 0 3px 10px rgba(168,61,88,0.35);
+        }
+
+        .btn-calendario {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            margin-top: 14px;
+            padding: 13px 20px;
+            background: #a83d58;
+            color: #ffffff;
+            border: none;
+            font-family: 'Cinzel', serif;
+            font-size: 11px;
+            letter-spacing: 2px;
+            text-decoration: none;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.35s ease;
+            box-shadow: 0 4px 12px rgba(168,61,88,0.25);
+            font-weight: 700;
+            border-radius: 4px;
+        }
+
+        .btn-calendario:hover {
+            background: #8f2a44;
+            box-shadow: 0 6px 18px rgba(168,61,88,0.35);
+        }
+
+        .btn-calendario svg {
+            width: 16px;
+            height: 16px;
+            fill: #fff;
+            flex-shrink: 0;
+        }
 
         /* Botón Sticky Control de Música flotante */
-
         #music-control-btn {
-
             position: fixed;
-
             bottom: 25px;
-
             right: 25px;
-
             width: 50px;
-
             height: 50px;
-
             border-radius: 50%;
-
             background: var(--text-light);
-
             border: 1px solid rgba(255, 255, 255, 0.3);
-
             color: #ffffff;
-
             display: flex;
-
             justify-content: center;
-
             align-items: center;
-
             cursor: pointer;
-
             z-index: 999;
-
             box-shadow: 0 4px 15px rgba(89, 74, 78, 0.3);
-
             opacity: 0;
-
             visibility: hidden;
-
             transition: opacity 0.5s ease, visibility 0.5s ease, transform 0.3s ease;
-
         }
-
-
 
         #music-control-btn:hover {
-
             transform: scale(1.05);
-
         }
-
-
 
         #music-control-btn.visible {
-
             opacity: 1;
-
             visibility: visible;
-
         }
-
-
 
         #music-control-btn svg {
-
             width: 22px;
-
             height: 22px;
-
             fill: #ffffff;
-
         }
-
-
 
         /* Botón de Confirmación WhatsApp */
-
         .btn-whatsapp {
-
             display: inline-flex;
-
             align-items: center;
-
             justify-content: center;
-
             gap: 10px;
-
             width: 100%;
-
             margin-top: 15px;
-
             padding: 14px 20px;
-
             background: var(--text-light);
-
             color: #ffffff;
-
             border: 1px solid var(--text-light);
-
             font-family: 'Cinzel', serif;
-
             font-size: 12px;
-
             letter-spacing: 2px;
-
             text-decoration: none;
-
             text-transform: uppercase;
-
             cursor: pointer;
-
             transition: all 0.4s ease;
-
             box-shadow: 0 4px 10px rgba(89, 74, 78, 0.15);
-
             font-weight: 600;
-
             border-radius: 4px;
-
             text-align: center;
-
         }
-
-
 
         .btn-whatsapp:hover {
-
             background: #ffffff;
-
             color: var(--text-light);
-
         }
-
-
 
         /* Flores / Pétalos Flotantes */
-
         .flower-petal {
-
             position: absolute;
-
             background-color: #ffd1dc; 
-
             border-radius: 150% 0 150% 0;
-
             pointer-events: none;
-
             filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.8));
-
             animation: float-up infinite ease-in;
-
             opacity: 0;
-
         }
-
-
 
         /* Animaciones */
-
         @keyframes pulse {
-
             0% { opacity: 0.5; }
-
             50% { opacity: 1; }
-
             100% { opacity: 0.5; }
-
         }
-
-
 
         @keyframes float-up {
-
             0% {
-
                 transform: translateY(0) translateX(0) rotate(0deg) scale(0.5);
-
                 opacity: 0;
-
             }
-
-            15% {
-
-                opacity: 0.6;
-
-            }
-
-            85% {
-
-                opacity: 0.6;
-
-            }
-
+            15% { opacity: 0.6; }
+            85% { opacity: 0.6; }
             100% {
-
                 transform: translateY(-100vh) translateX(50px) rotate(360deg) scale(1);
-
                 opacity: 0;
-
             }
-
         }
 
-
-
         /* Responsivo */
-
         @media (max-width: 400px) {
-
             .envelope {
-
                 width: 290px;
-
                 height: 210px;
-
             }
-
             .envelope::before { border-right-width: 145px; border-top-width: 105px; border-bottom-width: 105px; }
-
             .envelope::after { border-left-width: 145px; border-top-width: 105px; border-bottom-width: 105px; }
-
             .front-flap { border-left-width: 145px; border-right-width: 145px; border-top-width: 115px; }
-
             .wax-seal { top: 95px; }
-
             .main-title { font-size: 52px; }
-
             .invitation-frame { padding: 35px 20px; }
-
+            .bloque-rosa-solido,
+            .bloque-rosa-degradado { margin: 0 -20px; }
         }
 
     </style>
@@ -1297,23 +940,13 @@
 
 <body>
 
-
-
     <audio id="song" src="assets/song.mp3" loop preload="auto"></audio>
 
-
-
     <button id="music-control-btn" onclick="toggleMusic()" aria-label="Control de música">
-
         <svg id="music-icon" viewBox="0 0 24 24">
-
             <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-
         </svg>
-
     </button>
-
-
 
     <div id="envelope-screen">
 
@@ -1343,608 +976,479 @@
 
     </div>
 
-
-
     <main id="main-invitation">
 
         <div id="lanterns-container" style="position: absolute; top:0; left:0; width:100%; height:100%; overflow:hidden; pointer-events:none; z-index:1;"></div>
 
-
-
         <div class="invitation-frame" style="z-index: 2;">
 
             <div class="lotus-header">
-
                 <svg viewBox="0 0 24 24">
-
                     <path d="M5 16L3 5L8.5 10L12 4L15.5 10L21 5L19 16H5M19 19C19 19.55 18.55 20 18 20H6C5.45 20 5 19.55 5 19V18H19V19Z"/>
-
                 </svg>
-
             </div>
-
-
 
             <div class="section-tag">Mis XV Años</div>
-
             <h1 class="main-title">Paula</h1>
-
             <div class="full-name">García Calixto</div>
 
-            
-
             <p class="phrase">
-
                 "Hoy empieza una nueva etapa mágica en mi vida, llena de ilusiones y momentos que deseo conservar por siempre. Quiero compartir esta noche tan especial con las personas que más quiero."
-
             </p>
 
-
-
             <div class="divider"></div>
 
-
-
             <div class="info-block">
-
                 <div class="info-label">Con la bendición de mis padres</div>
-
                 <div class="family-names">
-
                     Nancy Calixto García<br>
-
                     Norberto García Hernández
-
                 </div>
-
             </div>
-
-
 
             <div class="info-block">
-
                 <div class="info-label">Mis Padrinos</div>
-
                 <div class="family-names">
-
                     Angel Humberto Calixto García<br>
-
                     Yarisnay Rivera Espinosa
-
                 </div>
-
             </div>
 
-
-
             <div class="divider"></div>
-
-
 
             <div class="section-tag">Cuenta Atrás</div>
-
             <div class="countdown-grid" id="countdown-timer">
-
                 <div class="countdown-item">
-
                     <span class="countdown-number" id="days">00</span>
-
                     <span class="countdown-label">Días</span>
-
                 </div>
-
                 <div class="countdown-item">
-
                     <span class="countdown-number" id="hours">00</span>
-
                     <span class="countdown-label">Hrs</span>
-
                 </div>
-
                 <div class="countdown-item">
-
                     <span class="countdown-number" id="minutes">00</span>
-
                     <span class="countdown-label">Min</span>
-
                 </div>
-
                 <div class="countdown-item">
-
                     <span class="countdown-number" id="seconds">00</span>
-
                     <span class="countdown-label">Seg</span>
-
                 </div>
-
             </div>
 
-
-
             <div class="divider"></div>
-
-
 
             <div class="info-grid">
 
-                <div class="info-block">
-
+                <!-- FECHA - BLOQUE SÓLIDO ROSA + CALENDARIO -->
+                <div class="bloque-rosa-solido">
                     <div class="info-label">Fecha</div>
-
                     <div class="info-value-main">05.SEP.2026</div>
+                    <div class="info-value-sub" style="color: #7a3a47; margin-top: 4px;">Sábado • Horario por definir</div>
 
-                    <div class="info-value-sub">Sábado • Horario por definir</div>
+                    <!-- Calendario visual Septiembre 2026 -->
+                    <div class="calendar-widget">
+                        <div class="calendar-header">
+                            2026
+                            <div class="calendar-month">Septiembre</div>
+                        </div>
+                        <div class="calendar-body">
+                            <div class="calendar-days-header">
+                                <span class="calendar-day-name">Dom</span>
+                                <span class="calendar-day-name">Lun</span>
+                                <span class="calendar-day-name">Mar</span>
+                                <span class="calendar-day-name">Mié</span>
+                                <span class="calendar-day-name">Jue</span>
+                                <span class="calendar-day-name">Vie</span>
+                                <span class="calendar-day-name">Sáb</span>
+                            </div>
+                            <div class="calendar-grid">
+                                <!-- Sep 2026: empieza en martes → 2 celdas vacías (Dom, Lun) -->
+                                <span class="cal-day empty"></span>
+                                <span class="cal-day empty"></span>
+                                <span class="cal-day">1</span>
+                                <span class="cal-day">2</span>
+                                <span class="cal-day">3</span>
+                                <span class="cal-day">4</span>
+                                <span class="cal-day highlight">5</span>
+                                <span class="cal-day">6</span>
+                                <span class="cal-day">7</span>
+                                <span class="cal-day">8</span>
+                                <span class="cal-day">9</span>
+                                <span class="cal-day">10</span>
+                                <span class="cal-day">11</span>
+                                <span class="cal-day">12</span>
+                                <span class="cal-day">13</span>
+                                <span class="cal-day">14</span>
+                                <span class="cal-day">15</span>
+                                <span class="cal-day">16</span>
+                                <span class="cal-day">17</span>
+                                <span class="cal-day">18</span>
+                                <span class="cal-day">19</span>
+                                <span class="cal-day">20</span>
+                                <span class="cal-day">21</span>
+                                <span class="cal-day">22</span>
+                                <span class="cal-day">23</span>
+                                <span class="cal-day">24</span>
+                                <span class="cal-day">25</span>
+                                <span class="cal-day">26</span>
+                                <span class="cal-day">27</span>
+                                <span class="cal-day">28</span>
+                                <span class="cal-day">29</span>
+                                <span class="cal-day">30</span>
+                            </div>
+                        </div>
+                    </div>
 
+                    <button class="btn-calendario" onclick="addToCalendar()">
+                        <svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5C3.89 3 3 3.9 3 5v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm0 16H5V9h14v10zm0-12H5V5h14v2zM7 11h5v5H7z"/></svg>
+                        Agregar a tu Calendario
+                    </button>
                 </div>
-
-
 
                 <div class="divider"></div>
 
-
-
                 <div class="info-block">
-
                     <div class="info-label">Ubicaciones</div>
-
                     <div class="info-value-main">Azcapotzalco</div>
-
                     <div class="info-value-sub">Ciudad de México</div>
 
-                    
                     <!-- FICHA CEREMONIA con foto de fondo -->
-
                     <div class="map-card map-card-ceremonia" style="margin-bottom: 20px;">
-
                         <div style="font-family: 'Cinzel', serif; font-size: 11px; color: var(--text-light); font-weight: 600; letter-spacing: 1px; margin-bottom: 3px;">
-
                             Ceremonia: <span style="font-family: 'Montserrat', sans-serif; font-weight: 600; color: var(--text-muted);">Capilla de Santa Teresita</span>
-
                         </div>
-
                         <div style="font-family: 'Montserrat', sans-serif; font-size: 13px; color: var(--text-light); opacity: 0.9; line-height: 1.4; margin-bottom: 5px; font-weight: 400;">
-
                             (Colegio Santa Teresita) C. Santander 16, San Rafael, Azcapotzalco, 02010
-
                         </div>
-
                         <div class="map-wrapper">
-
                             <iframe 
-
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.5457049445194!2d-99.1765876!3d19.4751855!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f9ce0691b059%3A0xc4eb0ea5fcefe662!2sColegio%20Santa%20Teresita!5e0!3m2!1ses-419!2smx!4v1716410000000!5m2!1ses-419!2smx" 
-
                                 width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-
                             </iframe>
-
                         </div>
-
                     </div>
-
 
                     <!-- FICHA SALÓN con foto de fondo -->
-
                     <div class="map-card map-card-salon">
-
                         <div style="font-family: 'Cinzel', serif; font-size: 11px; color: var(--text-light); font-weight: 600; letter-spacing: 1px; margin-bottom: 3px;">
-
                             Recepción: <span style="font-family: 'Montserrat', sans-serif; font-weight: 600; color: var(--text-muted);">Salón Melody</span>
-
                         </div>
-
                         <div style="font-family: 'Montserrat', sans-serif; font-size: 13px; color: var(--text-light); opacity: 0.9; line-height: 1.4; margin-bottom: 5px; font-weight: 400;">
-
                             Av. Morelos 49C, San Andres, Azcapotzalco, 02240
-
                         </div>
-
                         <div class="map-wrapper">
-
                             <iframe 
-
                                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3761.4285741914175!2d-99.1863583!3d19.4802422!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f99be44983a5%3A0x7be9265f2a1ecf94!2sAv.%20Morelos%2049%2C%20San%20Andres%2C%20Azcapotzalco%2C%2002240%20Ciudad%20de%20M%C3%A9xico%2C%20CDMX!5e0!3m2!1ses-419!2smx!4v1716410100000!5m2!1ses-419!2smx" 
-
                                 width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-
                             </iframe>
-
                         </div>
-
                     </div>
-
                 </div>
-
-
 
                 <div class="divider"></div>
 
+                <!-- ========================================
+                     SECCIÓN ITINERARIO - BLOQUE DEGRADADO ROSA
+                ======================================== -->
 
+                <div class="bloque-rosa-degradado">
+                    <div class="section-tag" style="margin-bottom: 4px;">Itinerario</div>
+                    <ul class="itinerario-list">
 
-                <div class="info-block">
+                        <li class="itinerario-item">
+                            <span class="itinerario-hora">6:00 P.M.</span>
+                            <span class="itinerario-sep"></span>
+                            <span class="itinerario-evento">Misa</span>
+                        </li>
 
+                        <li class="itinerario-item">
+                            <span class="itinerario-hora">8:30 P.M.</span>
+                            <span class="itinerario-sep"></span>
+                            <span class="itinerario-evento">Entrada al Salón</span>
+                        </li>
+
+                        <li class="itinerario-item">
+                            <span class="itinerario-hora">9:00 P.M.</span>
+                            <span class="itinerario-sep"></span>
+                            <span class="itinerario-evento">Cena</span>
+                        </li>
+
+                        <li class="itinerario-item">
+                            <span class="itinerario-hora">10:00 P.M.</span>
+                            <span class="itinerario-sep"></span>
+                            <span class="itinerario-evento">Vals</span>
+                        </li>
+
+                        <li class="itinerario-item">
+                            <span class="itinerario-hora">11:00 P.M.</span>
+                            <span class="itinerario-sep"></span>
+                            <span class="itinerario-evento">Pastel</span>
+                        </li>
+
+                        <li class="itinerario-item">
+                            <span class="itinerario-hora">11:20 P.M.</span>
+                            <span class="itinerario-sep"></span>
+                            <span class="itinerario-evento">Baile</span>
+                        </li>
+
+                        <li class="itinerario-item">
+                            <span class="itinerario-hora">2:00 A.M.</span>
+                            <span class="itinerario-sep"></span>
+                            <span class="itinerario-evento">Fin de Evento</span>
+                        </li>
+
+                    </ul>
+                </div>
+
+                <div class="divider"></div>
+
+                <!-- CÓDIGO DE VESTIMENTA - BLOQUE SÓLIDO ROSA -->
+                <div class="bloque-rosa-solido">
                     <div class="info-label">Código de Vestimenta</div>
-
                     <div class="info-value-main" style="font-size: 19px; letter-spacing: 4px;">Formal</div>
-
-                    <div class="info-value-sub" style="font-style: italic; font-size: 14px; color: #a4636b; margin-top: 6px; font-weight: 500;">
-
+                    <div class="info-value-sub" style="font-style: italic; font-size: 14px; color: #7a3a47; margin-top: 6px; font-weight: 500;">
                         Reservando el color rosa para la festejada
-
                     </div>
-
                 </div>
-
-
 
                 <div class="divider"></div>
 
-
-
                 <div class="info-block">
-
                     <div class="info-label">Mesa de Regalos</div>
-
                     <div class="info-value-sub" style="font-size: 14px; color: var(--text-muted); font-style: italic; font-weight: 500;">
-
                         Información en proceso
-
                     </div>
-
                 </div>
 
             </div>
 
-
-
             <div class="divider"></div>
-
-
 
             <p class="phrase" style="font-size: 17px; margin-top: 10px; margin-bottom: 10px;">
-
                 "Que estos quince años que hoy comienzo a vivir sean el reflejo de mis más hermosos sueños, guiados siempre por el amor de mi familia y la alegría de compartir la vida con amigos tan especiales como ustedes."
-
             </p>
-
-
 
             <div class="divider"></div>
 
-            
+            <!-- CONFIRMACIÓN - BLOQUE DEGRADADO ROSA -->
+            <div class="bloque-rosa-degradado">
+                <div class="section-tag">Confirmación</div>
+                <p style="font-size: 13px; font-family: 'Montserrat', sans-serif; font-weight: 500; opacity: 0.9; margin-bottom: 15px; color: var(--text-light);">
+                    Agradecemos confirmar tu asistencia completando tus datos a continuación:
+                </p>
 
-            <div class="section-tag">Confirmación</div>
+                <div class="rsvp-form">
+                    <div class="form-group">
+                        <label class="form-label" for="guest-name" style="color: #7a3a47;">Nombre Completo</label>
+                        <input type="text" id="guest-name" class="form-input" placeholder="Escribe tu nombre">
+                    </div>
 
-            <p style="font-size: 13px; font-family: 'Montserrat', sans-serif; font-weight: 500; opacity: 0.9; margin-bottom: 15px;">
-
-                Agradecemos confirmar tu asistencia completando tus datos a continuación:
-
-            </p>
-
-
-
-            <div class="rsvp-form">
-
-                <div class="form-group">
-
-                    <label class="form-label" for="guest-name">Nombre Completo</label>
-
-                    <input type="text" id="guest-name" class="form-input" placeholder="Escribe tu nombre">
-
+                    <button onclick="sendConfirmationViaWhatsApp()" class="btn-whatsapp">
+                        Confirmar por WhatsApp
+                    </button>
                 </div>
-
-
-
-                <button onclick="sendConfirmationViaWhatsApp()" class="btn-whatsapp">
-
-                    Confirmar por WhatsApp
-
-                </button>
-
             </div>
 
-
-
             <div class="divider"></div>
 
-            
-
             <div style="font-family: 'Cinzel', serif; font-size: 11px; letter-spacing: 2px; color: var(--text-muted); margin-top: 20px; font-weight: 600;">
-
                 INVYTIA PREVIEW DATA
-
             </div>
 
         </div>
 
     </main>
 
-
-
     <script>
 
         let isPlaying = false;
 
+        // ========================================
+        // AGREGAR A CALENDARIO (.ics universal)
+        // ========================================
+        function addToCalendar() {
+            const icsContent = [
+                'BEGIN:VCALENDAR',
+                'VERSION:2.0',
+                'PRODID:-//XV Años Paula//ES',
+                'BEGIN:VEVENT',
+                'DTSTART:20260905T180000',
+                'DTEND:20260906T020000',
+                'SUMMARY:XV Años de Paula García Calixto',
+                'DESCRIPTION:Misa 6PM en Capilla de Santa Teresita • Recepción 8:30PM en Salón Melody\\, Azcapotzalco CDMX',
+                'LOCATION:Capilla de Santa Teresita / Salón Melody\\, Azcapotzalco\\, Ciudad de México',
+                'STATUS:CONFIRMED',
+                'END:VEVENT',
+                'END:VCALENDAR'
+            ].join('\r\n');
 
+            const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'XV-Anios-Paula-Garcia-Calixto.ics';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
 
-        // Listener dinámico nativo para saltarse el bloqueo estricto de audio móvil
-
-        document.addEventListener('DOMContentLoaded', () => {
-
-            const wrapper = document.querySelector('.envelope-wrapper');
-
-            if (wrapper) {
-
-                // Escuchamos clics y eventos táctiles directamente desde la API del DOM
-
-                ['click', 'touchstart'].forEach(eventName => {
-
-                    wrapper.addEventListener(eventName, (e) => {
-
-                        // Evita ejecuciones dobles accidentales en pantallas táctiles
-
-                        if (e.type === 'click' && 'ontouchstart' in window) return;
-
-                        openEnvelope();
-
-                    }, { passive: false });
-
+        // ========================================
+        // ANIMACIÓN ITINERARIO (slide desde derecha)
+        // ========================================
+        function initItinerarioObserver() {
+            const items = document.querySelectorAll('.itinerario-item');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Escalonamos cada item según su índice
+                        const index = Array.from(items).indexOf(entry.target);
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, index * 90);
+                        observer.unobserve(entry.target);
+                    }
                 });
+            }, { threshold: 0.15 });
 
+            items.forEach(item => observer.observe(item));
+        }
+
+        // Inicializar observer cuando el contenido sea visible
+        document.addEventListener('DOMContentLoaded', () => {
+            // Si ya está activo (poco probable), iniciar de inmediato
+            if (document.body.classList.contains('content-active')) {
+                initItinerarioObserver();
             }
-
+            // En cualquier caso, el observer se activa tras abrir el sobre
         });
 
-
+        // Listener dinámico nativo para saltarse el bloqueo estricto de audio móvil
+        document.addEventListener('DOMContentLoaded', () => {
+            const wrapper = document.querySelector('.envelope-wrapper');
+            if (wrapper) {
+                ['click', 'touchstart'].forEach(eventName => {
+                    wrapper.addEventListener(eventName, (e) => {
+                        if (e.type === 'click' && 'ontouchstart' in window) return;
+                        openEnvelope();
+                    }, { passive: false });
+                });
+            }
+        });
 
         function openEnvelope() {
-
             const wrapper = document.querySelector('.envelope-wrapper');
-
             const screen = document.getElementById('envelope-screen');
-
             const audio = document.getElementById('song');
-
             const musicBtn = document.getElementById('music-control-btn');
 
-            
-
             if (wrapper.classList.contains('open')) return;
-
             wrapper.classList.add('open');
 
-            
-
-            // INTENTO DE REPRODUCCIÓN INMEDIATA (Firma directa de gesto de usuario)
-
             if (audio) {
-
                 audio.play().then(() => {
-
                     isPlaying = true;
-
                     updateMusicIcon();
-
                 }).catch(error => {
-
                     console.log("Fallo de reproducción forzada:", error);
-
                 });
-
             }
-
-            
 
             setTimeout(() => {
-
                 screen.classList.add('fade-out');
-
                 document.body.classList.add('content-active');
-
                 if (musicBtn) musicBtn.classList.add('visible');
-
                 createFlowerPetals();
-
+                // Iniciar animación del itinerario con scroll
+                setTimeout(initItinerarioObserver, 800);
             }, 1200);
-
         }
-
-
-
-        // Función para pausar / reanudar música desde el botón sticky flotante
 
         function toggleMusic() {
-
             const audio = document.getElementById('song');
-
             if (!audio) return;
-
-
-
             if (isPlaying) {
-
                 audio.pause();
-
                 isPlaying = false;
-
             } else {
-
                 audio.play().catch(err => console.log(err));
-
                 isPlaying = true;
-
             }
-
             updateMusicIcon();
-
         }
-
-
 
         function updateMusicIcon() {
-
             const icon = document.getElementById('music-icon');
-
             if (!icon) return;
-
-
-
             if (isPlaying) {
-
-                icon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>'; // Icono Pausa
-
+                icon.innerHTML = '<path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>';
             } else {
-
-                icon.innerHTML = '<path d="M8 5v14l11-7z"/>'; // Icono Play
-
+                icon.innerHTML = '<path d="M8 5v14l11-7z"/>';
             }
-
         }
-
-
-
-        // Generador dinámico de mensaje y redirección segura de WhatsApp al número exacto
 
         function sendConfirmationViaWhatsApp() {
-
             const nameInput = document.getElementById('guest-name');
-
-            
-
             if (!nameInput || !nameInput.value.trim()) {
-
                 alert('Por favor, ingresa tu nombre completo para realizar la confirmación.');
-
                 nameInput.focus();
-
                 return;
-
             }
-
-
-
             const name = nameInput.value.trim();
-
             const phoneNumber = "525583815508";
-
-            
-
             const message = `¡Hola! Confirmo mi asistencia al evento de los XV Años de Paula García Calixto.\n\n• Nombre: ${name}`;
-
-            
-
             const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-
             window.open(whatsappUrl, '_blank');
-
         }
 
-
-
         // Lógica de la Cuenta Atrás hacia el 5 de Septiembre de 2026
-
         const targetDate = new Date("September 5, 2026 00:00:00").getTime();
 
-
-
         const countdownInterval = setInterval(function() {
-
             const now = new Date().getTime();
-
             const timeLeft = targetDate - now;
 
-
-
             if (timeLeft < 0) {
-
                 clearInterval(countdownInterval);
-
                 document.getElementById("countdown-timer").innerHTML = "<div style='font-family:\"Cinzel\", serif; color:var(--text-light); letter-spacing:2px; font-weight:600;'>¡Llegó el Gran Día!</div>";
-
                 return;
-
             }
-
-
 
             const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-
             const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-
             const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-
             const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
 
-
-
             document.getElementById("days").innerText = days < 10 ? "0" + days : days;
-
             document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
-
             document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
-
             document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
-
         }, 1000);
 
-
-
         // Generador de lluvia de pétalos de flores
-
         function createFlowerPetals() {
-
             const container = document.getElementById('lanterns-container');
-
-            const count = 25; 
-
-            
-
+            const count = 25;
             for (let i = 0; i < count; i++) {
-
                 const petal = document.createElement('div');
-
                 petal.classList.add('flower-petal');
-
-                
-
-                const width = Math.random() * 8 + 6; 
-
-                const height = width * 1.3; 
-
+                const width = Math.random() * 8 + 6;
+                const height = width * 1.3;
                 const left = Math.random() * 100;
-
-                const animDuration = Math.random() * 10 + 7; 
-
+                const animDuration = Math.random() * 10 + 7;
                 const animDelay = Math.random() * 6;
-
-                
-
                 const pastelPinks = ['#ffd1dc', '#ffe4e1', '#ffb6c1', '#fff0f5'];
-
                 const selectedPink = pastelPinks[Math.floor(Math.random() * pastelPinks.length)];
-
-                
-
                 petal.style.width = `${width}px`;
-
                 petal.style.height = `${height}px`;
-
                 petal.style.left = `${left}%`;
-
                 petal.style.bottom = `-30px`;
-
                 petal.style.backgroundColor = selectedPink;
-
                 petal.style.animationDuration = `${animDuration}s`;
-
                 petal.style.animationDelay = `${animDelay}s`;
-
-                
-
                 container.appendChild(petal);
-
             }
-
         }
 
     </script>
