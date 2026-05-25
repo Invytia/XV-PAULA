@@ -230,80 +230,110 @@
         .map-wrapper { width:100%;height:175px;border-radius:4px;overflow:hidden;border:1px solid rgba(213,189,175,0.3); }
 
         /* ====== ITINERARIO NUEVO ====== */
-        .itinerario-timeline {
-            margin-top:20px;
-            position:relative;
-            padding:0 0 0 0;
-        }
-        /* Línea vertical central */
-        .itinerario-timeline::before {
-            content:'';
-            position:absolute;
-            left:50%;
-            top:0; bottom:0;
-            width:1px;
-            background:linear-gradient(to bottom,transparent,rgba(168,61,88,0.35) 8%,rgba(168,61,88,0.35) 92%,transparent);
-            transform:translateX(-50%);
-        }
-        .itin-row {
-            display:flex;
-            align-items:center;
-            justify-content:center;
-            position:relative;
-            margin-bottom:6px;
-            opacity:0;
-            transform:translateY(16px);
-            transition:opacity 0.5s ease,transform 0.5s ease;
-        }
-        .itin-row.visible { opacity:1;transform:translateY(0); }
+       .itinerario-timeline {
+    margin-top:20px;
+    position:relative;
+    padding:0;
+}
 
-        .itin-hora {
-            width:calc(50% - 22px);
-            text-align:right;
-            padding-right:14px;
-            font-family:'Cinzel',serif;
-            font-size:9px;
-            font-weight:400;
-            letter-spacing:0.8px;
-            color:rgba(122,58,71,0.9);
-            line-height:1.2;
-            flex-shrink:0;
-        }
-        .itin-node {
-            width:11px;height:11px;
-            border-radius:50%;
-            background:#fff;
-            border:2px solid #c0566e;
-            flex-shrink:0;
-            position:relative;
-            z-index:2;
-            box-shadow:0 0 0 3px rgba(192,86,110,0.12);
-        }
-        .itin-row.itin-main .itin-node {
-            width:15px;height:15px;
-            background:#c0566e;
-            border-color:#8f2a44;
-            box-shadow:0 0 0 4px rgba(168,61,88,0.15);
-        }
-        .itin-evento {
-            width:calc(50% - 22px);
-            padding-left:14px;
-            flex-shrink:0;
-        }
-        .itin-evento-nombre {
-            font-family:'Cormorant Garamond',serif;
-            font-style:italic;
-            font-size:21px;
-            font-weight:400;
-            color:var(--text-deep);
-            line-height:1.1;
-            text-align:left;
-        }
-        .itin-row.itin-main .itin-evento-nombre {
-            font-size:24px;
-            color:var(--text-rose);
-        }
+/* Línea vertical central */
+.itinerario-timeline::before {
+    content:'';
+    position:absolute;
+    left:50%;
+    top:0;
+    bottom:0;
+    width:1px;
+    background:linear-gradient(
+        to bottom,
+        transparent,
+        rgba(168,61,88,0.35) 8%,
+        rgba(168,61,88,0.35) 92%,
+        transparent
+    );
+    transform:translateX(-50%);
+}
 
+.itin-row {
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+    margin-bottom:10px;
+    opacity:0;
+    transform:translateY(16px);
+    transition:opacity 0.5s ease,transform 0.5s ease;
+}
+
+.itin-row.visible {
+    opacity:1;
+    transform:translateY(0);
+}
+
+.itin-hora {
+    width:calc(50% - 26px);
+    text-align:right;
+    padding-right:16px;
+    font-family:'Cinzel',serif;
+    font-size:9px;
+    font-weight:400;
+    letter-spacing:1px;
+    color:rgba(122,58,71,0.9);
+    line-height:1.2;
+    flex-shrink:0;
+}
+
+/* CORAZONES */
+.itin-node {
+    width:26px;
+    height:26px;
+    flex-shrink:0;
+    position:relative;
+    z-index:2;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.itin-node::before {
+    content:'♥';
+    font-size:16px;
+    color:#c0566e;
+    line-height:1;
+    text-shadow:
+        0 0 10px rgba(192,86,110,0.18),
+        0 0 18px rgba(192,86,110,0.12);
+    transition:all 0.3s ease;
+}
+
+.itin-row.itin-main .itin-node::before {
+    font-size:20px;
+    color:#a83d58;
+    text-shadow:
+        0 0 12px rgba(168,61,88,0.22),
+        0 0 24px rgba(168,61,88,0.16);
+}
+
+.itin-evento {
+    width:calc(50% - 26px);
+    padding-left:16px;
+    flex-shrink:0;
+}
+
+.itin-evento-nombre {
+    font-family:'Cormorant Garamond',serif;
+    font-style:italic;
+    font-size:21px;
+    font-weight:400;
+    color:var(--text-deep);
+    line-height:1.1;
+    text-align:left;
+}
+
+.itin-row.itin-main .itin-evento-nombre {
+    font-size:24px;
+    color:var(--text-rose);
+}
         /* ====== VESTIMENTA ====== */
         .vestimenta-icons { display:flex;justify-content:center;gap:22px;margin-top:14px; }
         .vestimenta-icon-item { display:flex;flex-direction:column;align-items:center;gap:6px; }
