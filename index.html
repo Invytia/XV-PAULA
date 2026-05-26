@@ -944,12 +944,18 @@
                 c.appendChild(p);
             }
         }
-        /* ===== MURO DE DESEOS ===== */
+       /* ===== MURO DE DESEOS ===== */
+        // PEGA AQUÍ TU URL DE GOOGLE APPS SCRIPT
+        const WISH_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxuWFYPYPsSC3hPkZ61UlYd9SbAn3cL3DS4GvSYQhYWx-zBAlR0XwkQfEyY0mKBGXO1/exec";
+
         const wishForm = document.getElementById('wish-form');
         if(wishForm) {
-            wishForm.addEventListener('submit', function(e) {
-                e.preventDefault(); // Evita que la página se recargue
+            wishForm.addEventListener('submit', async function(e) {
+                e.preventDefault(); 
+                
                 const btn = document.getElementById('btn-wish');
+                const nombre = document.getElementById('wish-nombre').value;
+                const mensaje = document.getElementById('wish-mensaje').value;
                 const originalContent = btn.innerHTML;
                 
                 // Estado de carga
@@ -957,22 +963,32 @@
                 btn.style.opacity = '0.7';
                 btn.disabled = true;
 
-                // NOTA: Aquí puedes integrar tu fetch() hacia Google Apps Script o base de datos.
-                
-                // Simulación de envío exitoso (borrar esto si usas un fetch real)
+                try {
+                    // Envío de datos al Google Apps Script
+                    await fetch(WISH_SCRIPT_URL, {
+                        method: 'POST',
+                        mode: 'no-cors', // Fundamental para evitar bloqueos de CORS
+                        headers: { 'Content-Type': 'text/plain' },
+                        body: JSON.stringify({ type: 'wish', nombre: nombre, mensaje: mensaje })
+                    });
+                } catch(err) { 
+                    console.log("Error de conexión:", err); 
+                }
+
+                // Efecto visual de éxito
                 setTimeout(() => {
                     btn.innerHTML = '¡Mensaje Enviado!';
                     btn.style.background = 'linear-gradient(135deg, rgba(122,58,71,0.88), rgba(168,61,88,0.88))';
                     btn.style.opacity = '1';
                     wishForm.reset();
                     
-                    // Regresa el botón a la normalidad después de 3 segundos
+                    // Regresar el botón a su estado normal
                     setTimeout(() => {
                         btn.innerHTML = originalContent;
                         btn.style.background = '';
                         btn.disabled = false;
-                    }, 3000);
-                }, 1500);
+                    }, 3500);
+                }, 800); // Pequeño retraso para que el usuario sienta que "cargó"
             });
         }
     </script>
