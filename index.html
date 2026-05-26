@@ -759,8 +759,29 @@
                 </button>
             </div>
 
+            <div class="divider-ornate"><div class="divider-ornate-diamond"></div></div>
+
+            <div class="bloque-vidrio">
+                <div class="section-heading">Buenos Deseos</div>
+                <p class="rsvp-intro">Deja un mensaje para Paula. Tu mensaje se guardará con cariño en esta nueva etapa.</p>
+                <form id="wish-form" style="text-align: left;">
+                    <div class="rsvp-input-wrap">
+                        <label class="rsvp-input-label" for="wish-nombre">Tu nombre</label>
+                        <input type="text" id="wish-nombre" class="rsvp-input" placeholder="Ej. Fernanda" required>
+                    </div>
+                    <div class="rsvp-input-wrap">
+                        <label class="rsvp-input-label" for="wish-mensaje">Mensaje</label>
+                        <textarea id="wish-mensaje" class="rsvp-input" placeholder="Escribe aquí tus buenos deseos..." required style="min-height: 120px; resize: vertical; padding-top: 15px;"></textarea>
+                    </div>
+                    <button type="submit" id="btn-wish" class="btn-confirmar" style="margin-top: 10px;">
+                        <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+                        Enviar Mensaje
+                    </button>
+                </form>
+            </div>
+
             <div class="divider-ornate" style="margin-top:30px;"><div class="divider-ornate-diamond"></div></div>
-            <div class="invitation-footer">Invytia Preview Data</div>
+            <div class="invitation-footer">Invytia Premium</div>
 
         </div>
     </main>
@@ -922,6 +943,37 @@
                 p.style.cssText=`width:${w}px;height:${w*1.3}px;left:${Math.random()*100}%;bottom:-30px;background-color:${['#ffd1dc','#ffe4e1','#ffb6c1','#fff0f5'][Math.floor(Math.random()*4)]};animation-duration:${Math.random()*10+7}s;animation-delay:${Math.random()*6}s;`;
                 c.appendChild(p);
             }
+        }
+        /* ===== MURO DE DESEOS ===== */
+        const wishForm = document.getElementById('wish-form');
+        if(wishForm) {
+            wishForm.addEventListener('submit', function(e) {
+                e.preventDefault(); // Evita que la página se recargue
+                const btn = document.getElementById('btn-wish');
+                const originalContent = btn.innerHTML;
+                
+                // Estado de carga
+                btn.innerHTML = 'Enviando...';
+                btn.style.opacity = '0.7';
+                btn.disabled = true;
+
+                // NOTA: Aquí puedes integrar tu fetch() hacia Google Apps Script o base de datos.
+                
+                // Simulación de envío exitoso (borrar esto si usas un fetch real)
+                setTimeout(() => {
+                    btn.innerHTML = '¡Mensaje Enviado!';
+                    btn.style.background = 'linear-gradient(135deg, rgba(122,58,71,0.88), rgba(168,61,88,0.88))';
+                    btn.style.opacity = '1';
+                    wishForm.reset();
+                    
+                    // Regresa el botón a la normalidad después de 3 segundos
+                    setTimeout(() => {
+                        btn.innerHTML = originalContent;
+                        btn.style.background = '';
+                        btn.disabled = false;
+                    }, 3000);
+                }, 1500);
+            });
         }
     </script>
 </body>
